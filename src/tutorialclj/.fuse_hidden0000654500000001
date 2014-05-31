@@ -1,7 +1,10 @@
 (ns tutorialclj.core 
 
-    (:use [overtone.live] 
-          [overtone.inst.sampled-piano] ))
+    (:use 
+    	 [overtone.live] 
+          [overtone.inst.sampled-piano]
+         
+          ))
 
 
 ;; use the sampled piano
