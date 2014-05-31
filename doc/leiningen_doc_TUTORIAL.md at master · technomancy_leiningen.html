@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html class="   "><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    
+    <title>leiningen/doc/TUTORIAL.md at master · technomancy/leiningen</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="https://github.com/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://github.com/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://github.com/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://github.com/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://github.com/apple-touch-icon-144.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="@github" name="twitter:site"><meta content="summary" name="twitter:card"><meta content="technomancy/leiningen" name="twitter:title"><meta content="leiningen - Automate Clojure projects without setting your hair on fire." name="twitter:description"><meta content="https://avatars2.githubusercontent.com/u/141?s=400" name="twitter:image:src">
+<meta content="GitHub" property="og:site_name"><meta content="object" property="og:type"><meta content="https://avatars2.githubusercontent.com/u/141?s=400" property="og:image"><meta content="technomancy/leiningen" property="og:title"><meta content="https://github.com/technomancy/leiningen" property="og:url"><meta content="leiningen - Automate Clojure projects without setting your hair on fire." property="og:description">
+
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    <link rel="conduit-xhr" href="https://ghconduit.com:25035/">
+    <link rel="xhr-socket" href="https://github.com/_sockets">
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_source" data-pjax-transient="">
+      <meta name="google-analytics" content="UA-3769691-2">
+
+    <meta content="collector.githubapp.com" name="octolytics-host"><meta content="collector-cdn.github.com" name="octolytics-script-host"><meta content="github" name="octolytics-app-id"><meta content="6D80D939:089D:92C6F14:538A2C9A" name="octolytics-dimension-request_id"><meta content="24445" name="octolytics-actor-id"><meta content="bussiere" name="octolytics-actor-login"><meta content="e88eaa31d3682bf3afca93038cec893a3901295f387cc6baae2759fd8b75faf1" name="octolytics-actor-hash">
+    
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+
+    <meta content="authenticity_token" name="csrf-param">
+<meta content="egywJirbsC8j+UffSxhBeEsJSxbJxopiTRfEp/4kzrqT1ZUNtyTK6Io+HGLyGMJJ/GdJ5uXcynRNX6nqSEnyWw==" name="csrf-token">
+
+    <link href="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/github-382e2d2394fe36287509f9d88e1aae81a78b71b2.css" media="all" rel="stylesheet" type="text/css">
+    <link href="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/github2-68f308ed3df6360990cad61e748100286688ace6.css" media="all" rel="stylesheet" type="text/css">
+    
+
+
+    <meta http-equiv="x-pjax-version" content="0a1f007a804ec5e0a6b81786356373f8">
+
+      
+  <meta name="description" content="leiningen - Automate Clojure projects without setting your hair on fire.">
+
+  <meta content="141" name="octolytics-dimension-user_id"><meta content="technomancy" name="octolytics-dimension-user_login"><meta content="356756" name="octolytics-dimension-repository_id"><meta content="technomancy/leiningen" name="octolytics-dimension-repository_nwo"><meta content="true" name="octolytics-dimension-repository_public"><meta content="false" name="octolytics-dimension-repository_is_fork"><meta content="356756" name="octolytics-dimension-repository_network_root_id"><meta content="technomancy/leiningen" name="octolytics-dimension-repository_network_root_nwo">
+  <link href="https://github.com/technomancy/leiningen/commits/master.atom" rel="alternate" title="Recent Commits to leiningen:master" type="application/atom+xml">
+
+  <script src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/api.js" async="" type="text/javascript"></script></head>
+
+
+  <body class="logged_in  env-production linux vis-public page-blob">
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+    <div class="wrapper">
+      
+      
+      
+      
+
+
+      <div class="header header-logged-in true">
+  <div class="container clearfix">
+
+    <a class="header-logo-invertocat" href="https://github.com/">
+  <span class="mega-octicon octicon-mark-github"></span>
+</a>
+
+    
+    <a href="https://github.com/notifications" aria-label="You have no unread notifications" class="notification-indicator tooltipped tooltipped-s" data-hotkey="g n">
+        <span class="mail-status all-read"></span>
+</a>
+
+      <div class="command-bar js-command-bar  in-repository">
+          <form accept-charset="UTF-8" action="/search" class="command-bar-form" id="top_search_form" method="get">
+
+<div class="commandbar">
+  <span class="message"></span>
+  <input data-hotkey="s" name="q" id="js-command-bar-field" placeholder="Search or type a command" tabindex="1" autocapitalize="off" data-username="bussiere" data-repo="technomancy/leiningen" data-branch="master" data-sha="502fd3ed423e75b5c0f936e6406ce85c8ce99593" type="text">
+  <div class="display hidden"></div>
+</div>
+
+    <input name="nwo" value="technomancy/leiningen" type="hidden">
+
+    <div class="select-menu js-menu-container js-select-menu search-context-select-menu">
+      <span class="minibutton select-menu-button js-menu-target" role="button" aria-haspopup="true">
+        <span class="js-select-button">This repository</span>
+      </span>
+
+      <div class="select-menu-modal-holder js-menu-content js-navigation-container" aria-hidden="true">
+        <div class="select-menu-modal">
+
+          <div class="select-menu-item js-navigation-item js-this-repository-navigation-item selected">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input class="js-search-this-repository" name="search_target" value="repository" checked="checked" type="radio">
+            <div class="select-menu-item-text js-select-button-text">This repository</div>
+          </div> <!-- /.select-menu-item -->
+
+          <div class="select-menu-item js-navigation-item js-all-repositories-navigation-item">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input name="search_target" value="global" type="radio">
+            <div class="select-menu-item-text js-select-button-text">All repositories</div>
+          </div> <!-- /.select-menu-item -->
+
+        </div>
+      </div>
+    </div>
+
+  <span class="help tooltipped tooltipped-s" aria-label="Show command bar help">
+    <span class="octicon octicon-question"></span>
+  </span>
+
+
+  <input name="ref" value="cmdform" type="hidden">
+
+</form>
+        <ul class="top-nav">
+          <li class="explore"><a href="https://github.com/explore">Explore</a></li>
+            <li><a href="https://gist.github.com/">Gist</a></li>
+            <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://help.github.com/">Help</a></li>
+        </ul>
+      </div>
+
+    
+
+
+  <ul id="user-links">
+    <li>
+      <a href="https://github.com/bussiere" class="name">
+        <img alt="bussiere" class=" js-avatar" data-user="24445" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/24445.png" height="20" width="20"> bussiere
+      </a>
+    </li>
+
+    <li class="new-menu dropdown-toggle js-menu-container">
+      <a href="#" class="js-menu-target tooltipped tooltipped-s" aria-label="Create new...">
+        <span class="octicon octicon-plus"></span>
+        <span class="dropdown-arrow"></span>
+      </a>
+
+      <div class="new-menu-content js-menu-content">
+      </div>
+    </li>
+
+    <li>
+      <a href="https://github.com/settings/profile" id="account_settings" class="tooltipped tooltipped-s" aria-label="Account settings ">
+        <span class="octicon octicon-tools"></span>
+      </a>
+    </li>
+    <li>
+      <form class="logout-form" action="/logout" method="post">
+        <button class="sign-out-button tooltipped tooltipped-s" aria-label="Sign out">
+          <span class="octicon octicon-sign-out"></span>
+        </button>
+      </form>
+    </li>
+
+  </ul>
+
+<div class="js-new-dropdown-contents hidden">
+  
+
+<ul class="dropdown-menu">
+  <li>
+    <a href="https://github.com/new"><span class="octicon octicon-repo"></span> New repository</a>
+  </li>
+  <li>
+    <a href="https://github.com/organizations/new"><span class="octicon octicon-organization"></span> New organization</a>
+  </li>
+
+
+    <li class="section-title">
+      <span title="technomancy/leiningen">This repository</span>
+    </li>
+      <li>
+        <a href="https://github.com/technomancy/leiningen/issues/new"><span class="octicon octicon-issue-opened"></span> New issue</a>
+      </li>
+</ul>
+
+</div>
+
+
+    
+  </div>
+</div>
+
+      
+
+        
+
+<div class="flash-global js-notice flash-warn">
+<div class="container">
+
+
+    <h2>
+      We are having a problem billing your credit card. Please <a href="https://github.com/account/billing">enter a new card</a>
+      or call your credit card provider for details on why the transaction failed.
+    </h2>
+    <p>You can contact <a href="mailto:support@github.com">support@github.com</a> with any questions.</p>
+      <p>
+        We'll try billing your account again on May 31, 2014.
+        Please resolve this issue soon for uninterrupted service.
+      </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+      <div id="start-of-content" class="accessibility-aid"></div>
+          <div class="site" itemscope="" itemtype="http://schema.org/WebPage">
+    <div id="js-flash-container">
+      
+    </div>
+    <div class="pagehead repohead instapaper_ignore readability-menu">
+      <div class="container">
+        
+
+<ul class="pagehead-actions">
+
+    <li class="subscription">
+      <form accept-charset="UTF-8" action="/notifications/subscribe" class="js-social-container" data-autosubmit="true" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" value="taoTyk0q+lKyPfSId3bBvzg/haJi1+ZImuCfGBHdJ5oZQBgVcZmDfD7/TJ7+ZyOPQw0AkCPPUQx2FvNjhYTvOA==" type="hidden"></div>  <input id="repository_id" name="repository_id" value="356756" type="hidden">
+
+    <div class="select-menu js-menu-container js-select-menu">
+      <a class="social-count js-social-count" href="https://github.com/technomancy/leiningen/watchers">
+        197
+      </a>
+      <span class="minibutton select-menu-button with-count js-menu-target" role="button" tabindex="0" aria-haspopup="true">
+        <span class="js-select-button">
+          <span class="octicon octicon-eye"></span>
+          Watch
+        </span>
+      </span>
+
+      <div class="select-menu-modal-holder">
+        <div class="select-menu-modal subscription-menu-modal js-menu-content" aria-hidden="true">
+          <div class="select-menu-header">
+            <span class="select-menu-title">Notification status</span>
+            <span class="octicon octicon-x js-menu-close"></span>
+          </div> <!-- /.select-menu-header -->
+
+          <div class="select-menu-list js-navigation-container" role="menu">
+
+            <div class="select-menu-item js-navigation-item selected" role="menuitem" tabindex="0">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <div class="select-menu-item-text">
+                <input checked="checked" id="do_included" name="do" value="included" type="radio">
+                <h4>Not watching</h4>
+                <span class="description">You only receive notifications for conversations in which you participate or are @mentioned.</span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <span class="octicon octicon-eye"></span>
+                  Watch
+                </span>
+              </div>
+            </div> <!-- /.select-menu-item -->
+
+            <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+              <span class="select-menu-item-icon octicon octicon octicon-check"></span>
+              <div class="select-menu-item-text">
+                <input id="do_subscribed" name="do" value="subscribed" type="radio">
+                <h4>Watching</h4>
+                <span class="description">You receive notifications for all conversations in this repository.</span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <span class="octicon octicon-eye"></span>
+                  Unwatch
+                </span>
+              </div>
+            </div> <!-- /.select-menu-item -->
+
+            <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <div class="select-menu-item-text">
+                <input id="do_ignore" name="do" value="ignore" type="radio">
+                <h4>Ignoring</h4>
+                <span class="description">You do not receive any notifications for conversations in this repository.</span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <span class="octicon octicon-mute"></span>
+                  Stop ignoring
+                </span>
+              </div>
+            </div> <!-- /.select-menu-item -->
+
+          </div> <!-- /.select-menu-list -->
+
+        </div> <!-- /.select-menu-modal -->
+      </div> <!-- /.select-menu-modal-holder -->
+    </div> <!-- /.select-menu -->
+
+</form>
+    </li>
+
+  <li>
+  
+
+  <div class="js-toggler-container js-social-container starring-container ">
+
+    <form accept-charset="UTF-8" action="/technomancy/leiningen/unstar" class="js-toggler-form starred" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" value="dVKB1hKTiMKjc5OHRjE5PKzCwhM3764az57T7W4eMpHMNJVg0ETjacZnhNM8ABe0xibk+J9l661n/NnvR4U0fw==" type="hidden"></div>
+      <button class="minibutton with-count js-toggler-target star-button" aria-label="Unstar this repository" title="Unstar technomancy/leiningen">
+        <span class="octicon octicon-star"></span><span class="text">Unstar</span>
+      </button>
+        <a class="social-count js-social-count" href="https://github.com/technomancy/leiningen/stargazers">
+          3,214
+        </a>
+</form>
+    <form accept-charset="UTF-8" action="/technomancy/leiningen/star" class="js-toggler-form unstarred" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" value="KHL0IlfqXmVq4BXz5VQzmBaZgJ6NRlRqepPGdHZ+D7e3okVoAeNL+W/8LYAvvTr1ZnCI0X4xsg08bYPPtyB+IA==" type="hidden"></div>
+      <button class="minibutton with-count js-toggler-target star-button" aria-label="Star this repository" title="Star technomancy/leiningen">
+        <span class="octicon octicon-star"></span><span class="text">Star</span>
+      </button>
+        <a class="social-count js-social-count" href="https://github.com/technomancy/leiningen/stargazers">
+          3,214
+        </a>
+</form>  </div>
+
+  </li>
+
+
+        <li>
+          <a href="https://github.com/technomancy/leiningen/fork" class="minibutton with-count js-toggler-target fork-button lighter tooltipped-n" title="Fork your own copy of technomancy/leiningen to your account" aria-label="Fork your own copy of technomancy/leiningen to your account" rel="nofollow" data-method="post">
+            <span class="octicon octicon-repo-forked"></span><span class="text">Fork</span>
+          </a>
+          <a href="https://github.com/technomancy/leiningen/network" class="social-count">584</a>
+        </li>
+
+
+</ul>
+
+        <h1 itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public">
+          <span class="repo-label"><span>public</span></span>
+          <span class="mega-octicon octicon-repo"></span>
+          <span class="author"><a href="https://github.com/technomancy" class="url fn" itemprop="url" rel="author"><span itemprop="title">technomancy</span></a></span><!--
+       --><span class="path-divider">/</span><!--
+       --><strong><a href="https://github.com/technomancy/leiningen" class="js-current-repository js-repo-home-link">leiningen</a></strong>
+
+          <span class="page-context-loader">
+            <img alt="" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+          </span>
+
+        </h1>
+      </div><!-- /.container -->
+    </div><!-- /.repohead -->
+
+    <div class="container">
+      <div class="repository-with-sidebar repo-container new-discussion-timeline js-new-discussion-timeline">
+        <div class="repository-sidebar clearfix">
+            
+
+<div class="sunken-menu vertical-right repo-nav js-repo-nav js-repository-container-pjax js-octicon-loaders">
+  <div class="sunken-menu-contents">
+    <ul class="sunken-menu-group">
+      <li class="tooltipped tooltipped-w" aria-label="Code">
+        <a href="https://github.com/technomancy/leiningen" aria-label="Code" class="selected js-selected-navigation-item sunken-menu-item" data-hotkey="g c" data-pjax="true" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /technomancy/leiningen">
+          <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+          <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>      </li>
+
+        <li class="tooltipped tooltipped-w" aria-label="Issues">
+          <a href="https://github.com/technomancy/leiningen/issues" aria-label="Issues" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-hotkey="g i" data-selected-links="repo_issues /technomancy/leiningen/issues">
+            <span class="octicon octicon-issue-opened"></span> <span class="full-word">Issues</span>
+            <span class="counter">47</span>
+            <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>        </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Pull Requests">
+        <a href="https://github.com/technomancy/leiningen/pulls" aria-label="Pull Requests" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-hotkey="g p" data-selected-links="repo_pulls /technomancy/leiningen/pulls">
+            <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull Requests</span>
+            <span class="counter">1</span>
+            <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>      </li>
+
+
+        <li class="tooltipped tooltipped-w" aria-label="Wiki">
+          <a href="https://github.com/technomancy/leiningen/wiki" aria-label="Wiki" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-hotkey="g w" data-selected-links="repo_wiki /technomancy/leiningen/wiki">
+            <span class="octicon octicon-book"></span> <span class="full-word">Wiki</span>
+            <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>        </li>
+    </ul>
+    <div class="sunken-menu-separator"></div>
+    <ul class="sunken-menu-group">
+
+      <li class="tooltipped tooltipped-w" aria-label="Pulse">
+        <a href="https://github.com/technomancy/leiningen/pulse" aria-label="Pulse" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="pulse /technomancy/leiningen/pulse">
+          <span class="octicon octicon-pulse"></span> <span class="full-word">Pulse</span>
+          <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>      </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Graphs">
+        <a href="https://github.com/technomancy/leiningen/graphs" aria-label="Graphs" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="repo_graphs repo_contributors /technomancy/leiningen/graphs">
+          <span class="octicon octicon-graph"></span> <span class="full-word">Graphs</span>
+          <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>      </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Network">
+        <a href="https://github.com/technomancy/leiningen/network" aria-label="Network" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-selected-links="repo_network /technomancy/leiningen/network">
+          <span class="octicon octicon-repo-forked"></span> <span class="full-word">Network</span>
+          <img alt="" class="mini-loader" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/octocat-spinner-32.gif" height="16" width="16">
+</a>      </li>
+    </ul>
+
+
+  </div>
+</div>
+
+              <div class="only-with-full-nav">
+                
+
+  
+
+<div class="clone-url open" data-protocol-type="http" data-url="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone">
+  <h3><strong>HTTPS</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input class="clone js-url-field" value="https://github.com/technomancy/leiningen.git" readonly="readonly" type="text">
+    <span class="url-box-clippy">
+    <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="https://github.com/technomancy/leiningen.git" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+  
+
+<div class="clone-url " data-protocol-type="ssh" data-url="/users/set_protocol?protocol_selector=ssh&amp;protocol_type=clone">
+  <h3><strong>SSH</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input class="clone js-url-field" value="git@github.com:technomancy/leiningen.git" readonly="readonly" type="text">
+    <span class="url-box-clippy">
+    <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="git@github.com:technomancy/leiningen.git" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+  
+
+<div class="clone-url " data-protocol-type="subversion" data-url="/users/set_protocol?protocol_selector=subversion&amp;protocol_type=clone">
+  <h3><strong>Subversion</strong> checkout URL</h3>
+  <div class="clone-url-box">
+    <input class="clone js-url-field" value="https://github.com/technomancy/leiningen" readonly="readonly" type="text">
+    <span class="url-box-clippy">
+    <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="https://github.com/technomancy/leiningen" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+
+<p class="clone-options">You can clone with
+      <a href="#" class="js-clone-selector" data-protocol="http">HTTPS</a>,
+      <a href="#" class="js-clone-selector" data-protocol="ssh">SSH</a>,
+      or <a href="#" class="js-clone-selector" data-protocol="subversion">Subversion</a>.
+  <span class="help tooltipped tooltipped-n" aria-label="Get help on which URL is right for you.">
+    <a href="https://help.github.com/articles/which-remote-url-should-i-use">
+    <span class="octicon octicon-question"></span>
+    </a>
+  </span>
+</p>
+
+
+
+                <a href="https://github.com/technomancy/leiningen/archive/master.zip" class="minibutton sidebar-button" aria-label="Download technomancy/leiningen as a zip file" title="Download technomancy/leiningen as a zip file" rel="nofollow">
+                  <span class="octicon octicon-cloud-download"></span>
+                  Download ZIP
+                </a>
+              </div>
+        </div><!-- /.repository-sidebar -->
+
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container="">
+          
+
+
+<a href="https://github.com/technomancy/leiningen/blob/1c4eafb0307a1fa99fc213ec615287658d7761ce/doc/TUTORIAL.md" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+<!-- blob contrib key: blob_contributors:v21:4bd11d8c492aa78ef3983802a4436c60 -->
+
+<p title="This is a placeholder element" class="js-history-link-replace hidden"></p>
+
+<a href="https://github.com/technomancy/leiningen/find/master" data-pjax="" data-hotkey="t" class="js-show-file-finder" style="display:none">Show File Finder</a>
+
+<div class="file-navigation">
+  
+
+<div class="select-menu js-menu-container js-select-menu">
+  <span class="minibutton select-menu-button js-menu-target" data-hotkey="w" data-master-branch="master" data-ref="master" role="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <span class="octicon octicon-git-branch"></span>
+    <i>branch:</i>
+    <span class="js-select-button">master</span>
+  </span>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax="" aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="select-menu-title">Switch branches/tags</span>
+        <span class="octicon octicon-x js-menu-close"></span>
+      </div> <!-- /.select-menu-header -->
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags" type="text">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" class="js-select-menu-tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" class="js-select-menu-tab">Tags</a>
+            </li>
+          </ul>
+        </div><!-- /.select-menu-tabs -->
+      </div><!-- /.select-menu-filters -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/1.x/doc/TUTORIAL.md" data-name="1.x" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.x">1.x</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/3.x/doc/TUTORIAL.md" data-name="3.x" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="3.x">3.x</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/auto-middleware/doc/TUTORIAL.md" data-name="auto-middleware" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="auto-middleware">auto-middleware</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/debian/doc/TUTORIAL.md" data-name="debian" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="debian">debian</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/drip/doc/TUTORIAL.md" data-name="drip" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="drip">drip</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/issue966/doc/TUTORIAL.md" data-name="issue966" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="issue966">issue966</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/last-wins/doc/TUTORIAL.md" data-name="last-wins" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="last-wins">last-wins</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item selected">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md" data-name="master" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="master">master</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/newoptions/doc/TUTORIAL.md" data-name="newoptions" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="newoptions">newoptions</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/plugin-ns/doc/TUTORIAL.md" data-name="plugin-ns" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="plugin-ns">plugin-ns</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/preview/doc/TUTORIAL.md" data-name="preview" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="preview">preview</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/printonly/doc/TUTORIAL.md" data-name="printonly" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="printonly">printonly</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/profile_unquoting/doc/TUTORIAL.md" data-name="profile_unquoting" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="profile_unquoting">profile_unquoting</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/release/doc/TUTORIAL.md" data-name="release" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="release">release</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md" data-name="stable" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="stable">stable</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/blob/with-profile-symmetry/doc/TUTORIAL.md" data-name="with-profile-symmetry" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="with-profile-symmetry">with-profile-symmetry</a>
+            </div> <!-- /.select-menu-item -->
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.3.4/doc/TUTORIAL.md" data-name="2.3.4" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.3.4">2.3.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.3.3/doc/TUTORIAL.md" data-name="2.3.3" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.3.3">2.3.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.3.2/doc/TUTORIAL.md" data-name="2.3.2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.3.2">2.3.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.3.1/doc/TUTORIAL.md" data-name="2.3.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.3.1">2.3.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.3.0/doc/TUTORIAL.md" data-name="2.3.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.3.0">2.3.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.2.0/doc/TUTORIAL.md" data-name="2.2.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.2.0">2.2.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.1.3/doc/TUTORIAL.md" data-name="2.1.3" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.1.3">2.1.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.1.2/doc/TUTORIAL.md" data-name="2.1.2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.1.2">2.1.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.1.1/doc/TUTORIAL.md" data-name="2.1.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.1.1">2.1.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.1.0/doc/TUTORIAL.md" data-name="2.1.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.1.0">2.1.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview10/doc/TUTORIAL.md" data-name="2.0.0-preview10" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview10">2.0.0-preview10</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview9/doc/TUTORIAL.md" data-name="2.0.0-preview9" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview9">2.0.0-preview9</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview8/doc/TUTORIAL.md" data-name="2.0.0-preview8" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview8">2.0.0-preview8</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview7/doc/TUTORIAL.md" data-name="2.0.0-preview7" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview7">2.0.0-preview7</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview6/doc/TUTORIAL.md" data-name="2.0.0-preview6" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview6">2.0.0-preview6</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview5/doc/TUTORIAL.md" data-name="2.0.0-preview5" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview5">2.0.0-preview5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview4/doc/TUTORIAL.md" data-name="2.0.0-preview4" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview4">2.0.0-preview4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview3/doc/TUTORIAL.md" data-name="2.0.0-preview3" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview3">2.0.0-preview3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview2/doc/TUTORIAL.md" data-name="2.0.0-preview2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview2">2.0.0-preview2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-preview1/doc/TUTORIAL.md" data-name="2.0.0-preview1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-preview1">2.0.0-preview1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-RC2/doc/TUTORIAL.md" data-name="2.0.0-RC2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-RC2">2.0.0-RC2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0-RC1/doc/TUTORIAL.md" data-name="2.0.0-RC1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0-RC1">2.0.0-RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/2.0.0/doc/TUTORIAL.md" data-name="2.0.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="2.0.0">2.0.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.7.1/doc/TUTORIAL.md" data-name="1.7.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.7.1">1.7.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.7.0/doc/TUTORIAL.md" data-name="1.7.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.7.0">1.7.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.6.2/doc/TUTORIAL.md" data-name="1.6.2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.6.2">1.6.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.6.1-windows/doc/TUTORIAL.md" data-name="1.6.1-windows" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.6.1-windows">1.6.1-windows</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.6.1.1/doc/TUTORIAL.md" data-name="1.6.1.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.6.1.1">1.6.1.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.6.1/doc/TUTORIAL.md" data-name="1.6.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.6.1">1.6.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.6.0/doc/TUTORIAL.md" data-name="1.6.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.6.0">1.6.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.5.2/doc/TUTORIAL.md" data-name="1.5.2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.5.2">1.5.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.5.1/doc/TUTORIAL.md" data-name="1.5.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.5.1">1.5.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.5.0-RC1/doc/TUTORIAL.md" data-name="1.5.0-RC1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.5.0-RC1">1.5.0-RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.5.0/doc/TUTORIAL.md" data-name="1.5.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.5.0">1.5.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.4.2/doc/TUTORIAL.md" data-name="1.4.2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.4.2">1.4.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.4.1/doc/TUTORIAL.md" data-name="1.4.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.4.1">1.4.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.4.0-RC2/doc/TUTORIAL.md" data-name="1.4.0-RC2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.4.0-RC2">1.4.0-RC2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.4.0-RC1/doc/TUTORIAL.md" data-name="1.4.0-RC1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.4.0-RC1">1.4.0-RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.4.0/doc/TUTORIAL.md" data-name="1.4.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.4.0">1.4.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.3.1/doc/TUTORIAL.md" data-name="1.3.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.3.1">1.3.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.3.0-RC1/doc/TUTORIAL.md" data-name="1.3.0-RC1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.3.0-RC1">1.3.0-RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.3.0/doc/TUTORIAL.md" data-name="1.3.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.3.0">1.3.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.2.0-RC2/doc/TUTORIAL.md" data-name="1.2.0-RC2" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.2.0-RC2">1.2.0-RC2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.2.0-RC1/doc/TUTORIAL.md" data-name="1.2.0-RC1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.2.0-RC1">1.2.0-RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.2.0/doc/TUTORIAL.md" data-name="1.2.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.2.0">1.2.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.1.0-RC1/doc/TUTORIAL.md" data-name="1.1.0-RC1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.1.0-RC1">1.1.0-RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.1.0/doc/TUTORIAL.md" data-name="1.1.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.1.0">1.1.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.0.1/doc/TUTORIAL.md" data-name="1.0.1" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.0.1">1.0.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/1.0.0/doc/TUTORIAL.md" data-name="1.0.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="1.0.0">1.0.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="https://github.com/technomancy/leiningen/tree/0.5.0/doc/TUTORIAL.md" data-name="0.5.0" data-skip-pjax="true" rel="nofollow" class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target" title="0.5.0">0.5.0</a>
+            </div> <!-- /.select-menu-item -->
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+    </div> <!-- /.select-menu-modal -->
+  </div> <!-- /.select-menu-modal-holder -->
+</div> <!-- /.select-menu -->
+
+  <div class="breadcrumb">
+    <span class="repo-root js-repo-root"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://github.com/technomancy/leiningen" data-branch="master" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">leiningen</span></a></span></span><span class="separator"> / </span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://github.com/technomancy/leiningen/tree/master/doc" data-branch="master" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">doc</span></a></span><span class="separator"> / </span><strong class="final-path">TUTORIAL.md</strong> <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="doc/TUTORIAL.md" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+  </div>
+</div>
+
+
+  <div class="commit file-history-tease">
+      <img alt="Antoine R. Dumont" class="main-avatar js-avatar" data-user="718812" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/718812.png" height="24" width="24">
+      <span class="author"><a href="https://github.com/ardumont" rel="contributor">ardumont</a></span>
+      <time datetime="2014-05-23T19:25:19+02:00" is="relative-time" title-format="%Y-%m-%d %H:%M:%S %z" title="2014-05-23 19:25:19 +0200">on 23 mai</time>
+      <div class="commit-title">
+          <a href="https://github.com/technomancy/leiningen/commit/7b151b262df1d3cdcb2dabde6d4512fddd667dd2" class="message" data-pjax="true" title="Add TOC to the tutorial">Add TOC to the tutorial</a>
+      </div>
+
+    <div class="participation">
+      <p class="quickstat"><a href="#blob_contributors_box" rel="facebox"><strong>22</strong>  contributors</a></p>
+          <a class="avatar tooltipped tooltipped-s" aria-label="technomancy" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=technomancy"><img alt="Phil Hagelberg" class=" js-avatar" data-user="141" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/141.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="michaelklishin" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=michaelklishin"><img alt="Michael Klishin" class=" js-avatar" data-user="1090" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/1090.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="alexcoventry" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=alexcoventry"><img alt="alexcoventry" class=" js-avatar" data-user="5084566" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/5084566.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="marick" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=marick"><img alt="Brian Marick" class=" js-avatar" data-user="71909" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/71909.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="hyPiRion" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=hyPiRion"><img alt="Jean Niklas L'orange" class=" js-avatar" data-user="504876" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/504876.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="laurentpetit" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=laurentpetit"><img alt="Laurent Petit" class=" js-avatar" data-user="98286" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/98286.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="mybuddymichael" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=mybuddymichael"><img alt="Michael Hanson" class=" js-avatar" data-user="186724" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/186724.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="mblair" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=mblair"><img alt="Matt Blair" class=" js-avatar" data-user="63750" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/63750.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="sergv" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=sergv"><img alt="Sergey Vinokurov" class=" js-avatar" data-user="1149355" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/1149355.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="llasram" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=llasram"><img alt="Marshall Bockrath-Vandegrift" class=" js-avatar" data-user="185528" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/185528.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="sebasoga" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=sebasoga"><img alt="Sebastian Sogamoso" class=" js-avatar" data-user="720224" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/720224.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="trevor" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=trevor"><img alt="Trevor Wennblom" class=" js-avatar" data-user="5945" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/5945.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="hura" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=hura"><img alt="hura" class=" js-avatar" data-user="671872" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/671872.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="m00sey" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=m00sey"><img alt="Kevin Griffin" class=" js-avatar" data-user="180035" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/180035.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="drewnoakes" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=drewnoakes"><img alt="Drew Noakes" class=" js-avatar" data-user="350947" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/350947.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="cldwalker" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=cldwalker"><img alt="Gabriel Horner" class=" js-avatar" data-user="11994" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/11994.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="fbernier" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=fbernier"><img alt="François Bernier" class=" js-avatar" data-user="147585" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/147585.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="offby1" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=offby1"><img alt="Eric Hanchrow" class=" js-avatar" data-user="3145" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/3145.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="zachpendleton" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=zachpendleton"><img alt="Zach Pendleton" class=" js-avatar" data-user="128774" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/128774.jpeg" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="ato" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=ato"><img alt="Alex Osborne" class=" js-avatar" data-user="10588" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/10588.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="ardumont" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=ardumont"><img alt="Antoine R. Dumont" class=" js-avatar" data-user="718812" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/718812.png" height="20" width="20"></a>
+    <a class="avatar tooltipped tooltipped-s" aria-label="acgetchell" href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md?author=acgetchell"><img alt="Adam Getchell" class=" js-avatar" data-user="434849" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/434849.jpeg" height="20" width="20"></a>
+
+
+    </div>
+    <div id="blob_contributors_box" style="display:none">
+      <h2 class="facebox-header">Users who have contributed to this file</h2>
+      <ul class="facebox-user-list">
+          <li class="facebox-user-list-item">
+            <img alt="Phil Hagelberg" class=" js-avatar" data-user="141" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/141.jpeg" height="24" width="24">
+            <a href="https://github.com/technomancy">technomancy</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Michael Klishin" class=" js-avatar" data-user="1090" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/1090.jpeg" height="24" width="24">
+            <a href="https://github.com/michaelklishin">michaelklishin</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="alexcoventry" class=" js-avatar" data-user="5084566" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/5084566.png" height="24" width="24">
+            <a href="https://github.com/alexcoventry">alexcoventry</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Brian Marick" class=" js-avatar" data-user="71909" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/71909.jpeg" height="24" width="24">
+            <a href="https://github.com/marick">marick</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Jean Niklas L'orange" class=" js-avatar" data-user="504876" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/504876.jpeg" height="24" width="24">
+            <a href="https://github.com/hyPiRion">hyPiRion</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Laurent Petit" class=" js-avatar" data-user="98286" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/98286.png" height="24" width="24">
+            <a href="https://github.com/laurentpetit">laurentpetit</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Michael Hanson" class=" js-avatar" data-user="186724" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/186724.png" height="24" width="24">
+            <a href="https://github.com/mybuddymichael">mybuddymichael</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Matt Blair" class=" js-avatar" data-user="63750" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/63750.jpeg" height="24" width="24">
+            <a href="https://github.com/mblair">mblair</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Sergey Vinokurov" class=" js-avatar" data-user="1149355" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/1149355.png" height="24" width="24">
+            <a href="https://github.com/sergv">sergv</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Marshall Bockrath-Vandegrift" class=" js-avatar" data-user="185528" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/185528.jpeg" height="24" width="24">
+            <a href="https://github.com/llasram">llasram</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Sebastian Sogamoso" class=" js-avatar" data-user="720224" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/720224.jpeg" height="24" width="24">
+            <a href="https://github.com/sebasoga">sebasoga</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Trevor Wennblom" class=" js-avatar" data-user="5945" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/5945.jpeg" height="24" width="24">
+            <a href="https://github.com/trevor">trevor</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="hura" class=" js-avatar" data-user="671872" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/671872.png" height="24" width="24">
+            <a href="https://github.com/hura">hura</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Kevin Griffin" class=" js-avatar" data-user="180035" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/180035.jpeg" height="24" width="24">
+            <a href="https://github.com/m00sey">m00sey</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Drew Noakes" class=" js-avatar" data-user="350947" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/350947.jpeg" height="24" width="24">
+            <a href="https://github.com/drewnoakes">drewnoakes</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Gabriel Horner" class=" js-avatar" data-user="11994" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/11994.jpeg" height="24" width="24">
+            <a href="https://github.com/cldwalker">cldwalker</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="François Bernier" class=" js-avatar" data-user="147585" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/147585.png" height="24" width="24">
+            <a href="https://github.com/fbernier">fbernier</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Eric Hanchrow" class=" js-avatar" data-user="3145" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/3145.jpeg" height="24" width="24">
+            <a href="https://github.com/offby1">offby1</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Zach Pendleton" class=" js-avatar" data-user="128774" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/128774.jpeg" height="24" width="24">
+            <a href="https://github.com/zachpendleton">zachpendleton</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Alex Osborne" class=" js-avatar" data-user="10588" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/10588.png" height="24" width="24">
+            <a href="https://github.com/ato">ato</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Antoine R. Dumont" class=" js-avatar" data-user="718812" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/718812.png" height="24" width="24">
+            <a href="https://github.com/ardumont">ardumont</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="Adam Getchell" class=" js-avatar" data-user="434849" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/434849.jpeg" height="24" width="24">
+            <a href="https://github.com/acgetchell">acgetchell</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+<div class="file-box">
+  <div class="file">
+    <div class="meta clearfix">
+      <div class="info file-name">
+        <span class="icon"><b class="octicon octicon-file-text"></b></span>
+        <span class="mode" title="File Mode">file</span>
+        <span class="meta-divider"></span>
+          <span>687 lines (553 sloc)</span>
+          <span class="meta-divider"></span>
+        <span>27.379 kb</span>
+      </div>
+      <div class="actions">
+        <div class="button-group">
+                <a class="minibutton tooltipped tooltipped-n js-update-url-with-hash" aria-label="Clicking this button will automatically fork this project so you can edit the file" href="https://github.com/technomancy/leiningen/edit/master/doc/TUTORIAL.md" data-method="post" rel="nofollow">Edit</a>
+          <a href="https://github.com/technomancy/leiningen/raw/master/doc/TUTORIAL.md" class="button minibutton " id="raw-url">Raw</a>
+            <a href="https://github.com/technomancy/leiningen/blame/master/doc/TUTORIAL.md" class="button minibutton js-update-url-with-hash">Blame</a>
+          <a href="https://github.com/technomancy/leiningen/commits/master/doc/TUTORIAL.md" class="button minibutton " rel="nofollow">History</a>
+        </div><!-- /.button-group -->
+
+            <a class="minibutton danger empty-icon tooltipped tooltipped-s" href="https://github.com/technomancy/leiningen/delete/master/doc/TUTORIAL.md" aria-label="Fork this project and delete file" data-method="post" data-test-id="delete-blob-file" rel="nofollow">
+
+          Delete
+        </a>
+      </div><!-- /.actions -->
+    </div>
+      
+  <div id="readme" class="blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage">
+
+
+
+<p><strong>Table of Contents</strong>  <em>generated with <a href="http://doctoc.herokuapp.com/">DocToc</a></em></p>
+
+<ul class="task-list">
+<li>
+<a href="#tutorial">Tutorial</a>
+
+<ul class="task-list">
+<li><a href="#what-this-tutorial-covers">What This Tutorial Covers</a></li>
+<li><a href="#getting-help">Getting Help</a></li>
+<li><a href="#leiningen-projects">Leiningen Projects</a></li>
+<li>
+<a href="#creating-a-project">Creating a Project</a>
+
+<ul class="task-list">
+<li><a href="#directory-layout">Directory Layout</a></li>
+<li><a href="#filename-to-namespace-mapping-convention">Filename-to-Namespace Mapping Convention</a></li>
+</ul>
+</li>
+<li><a href="#projectclj">project.clj</a></li>
+<li>
+<a href="#dependencies">Dependencies</a>
+
+<ul class="task-list">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#artifact-ids-groups-and-versions">Artifact IDs, Groups, and Versions</a></li>
+<li><a href="#snapshot-versions">Snapshot Versions</a></li>
+<li><a href="#repositories">Repositories</a></li>
+<li><a href="#checkout-dependencies">Checkout Dependencies</a></li>
+<li><a href="#search">Search</a></li>
+</ul>
+</li>
+<li><a href="#running-code">Running Code</a></li>
+<li><a href="#tests">Tests</a></li>
+<li><a href="#profiles">Profiles</a></li>
+<li>
+<a href="#what-to-do-with-it">What to do with it</a>
+
+<ul class="task-list">
+<li><a href="#uberjar">Uberjar</a></li>
+<li><a href="#framework-uberjars">Framework (Uber)jars</a></li>
+<li><a href="#server-side-projects">Server-side Projects</a></li>
+<li><a href="#publishing-libraries">Publishing Libraries</a></li>
+</ul>
+</li>
+<li><a href="#thats-it%21">That's It!</a></li>
+</ul>
+</li>
+</ul><h1>
+<a name="user-content-tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Tutorial</h1>
+
+<p>Leiningen is for automating Clojure projects without setting your hair on fire.</p>
+
+<p>It offers various project-related tasks and can:</p>
+
+<ul class="task-list">
+<li>create new projects</li>
+<li>fetch dependencies for your project</li>
+<li>run tests</li>
+<li>run a fully-configured REPL</li>
+<li>compile Java sources (if any)</li>
+<li>run the project (if the project isn't a library)</li>
+<li>generate a maven-style "pom" file for the project for interop</li>
+<li>compile and package projects for deployment</li>
+<li>publish libraries to repositories such as <a href="http://clojars.org/">Clojars</a>
+</li>
+<li>run custom automation tasks written in Clojure (leiningen plug-ins)</li>
+</ul><p>If you come from the Java world, Leiningen could be thought of as
+"Maven meets Ant without the pain". For Ruby and Python folks,
+Leiningen combines RubyGems/Bundler/Rake and pip/Fabric in a single
+tool.</p>
+
+<h2>
+<a name="user-content-what-this-tutorial-covers" class="anchor" href="#what-this-tutorial-covers"><span class="octicon octicon-link"></span></a>What This Tutorial Covers</h2>
+
+<p>This tutorial will briefly cover project structure, dependency
+management, running tests, the REPL, and topics related to deployment.</p>
+
+<p>For those of you new to the JVM who have never touched Ant or Maven in
+anger: don't panic. Leiningen is designed with you in mind. This
+tutorial will help you get started and explain Leiningen's take on
+project automation and JVM-land dependency management.</p>
+
+<h2>
+<a name="user-content-getting-help" class="anchor" href="#getting-help"><span class="octicon octicon-link"></span></a>Getting Help</h2>
+
+<p>Also keep in mind that Leiningen ships with fairly comprehensive help;
+<code>lein help</code> gives a list of tasks while <code>lein help $TASK</code> provides
+details. Further documentation such as the readme, sample
+configuration, and even this tutorial are also provided.</p>
+
+<h2>
+<a name="user-content-leiningen-projects" class="anchor" href="#leiningen-projects"><span class="octicon octicon-link"></span></a>Leiningen Projects</h2>
+
+<p>Leiningen works with <em>projects</em>. A project is a directory containing a
+group of Clojure (and possibly Java) source files, along with a bit of
+metadata about them. The metadata is stored in a file named
+<code>project.clj</code> in the project's root directory, which is how you tell
+Leiningen about things like</p>
+
+<ul class="task-list">
+<li>Project name</li>
+<li>Project description</li>
+<li>What libraries the project depends on</li>
+<li>What Clojure version to use</li>
+<li>Where to find source files</li>
+<li>What's the main namespace of the app</li>
+</ul><p>and more.</p>
+
+<p>Most Leiningen tasks only make sense in the context of a project. Some
+(for example, <code>repl</code> or <code>help</code>) can also be called from any directory.</p>
+
+<p>Next let's take a look at how projects are created.</p>
+
+<h2>
+<a name="user-content-creating-a-project" class="anchor" href="#creating-a-project"><span class="octicon octicon-link"></span></a>Creating a Project</h2>
+
+<p>We'll assume you've got Leiningen installed as per the
+<a href="https://github.com/technomancy/leiningen/blob/stable/README.md">README</a>.
+Generating a new project is easy:</p>
+
+<pre><code>$ lein new app my-stuff
+
+Generating a project called my-stuff based on the 'app' template.
+
+$ cd my-stuff
+$ find .
+.
+./.gitignore
+./doc
+./doc/intro.md
+./LICENSE
+./project.clj
+./README.md
+./resources
+./src
+./src/my_stuff
+./src/my_stuff/core.clj
+./test
+./test/my_stuff
+./test/my_stuff/core_test.clj
+</code></pre>
+
+<p>In this example we're using the <code>app</code> template, which is intended for
+an application project rather than a library. Omitting the <code>app</code>
+argument will use the <code>default</code> template, which is suitable for
+libraries.</p>
+
+<h3>
+<a name="user-content-directory-layout" class="anchor" href="#directory-layout"><span class="octicon octicon-link"></span></a>Directory Layout</h3>
+
+<p>Here we've got your project's README, a <code>src/</code> directory containing the
+code, a <code>test/</code> directory, and a <code>project.clj</code> file which describes your
+project to Leiningen. The <code>src/my_stuff/core.clj</code> file corresponds to
+the <code>my-stuff.core</code> namespace.</p>
+
+<h3>
+<a name="user-content-filename-to-namespace-mapping-convention" class="anchor" href="#filename-to-namespace-mapping-convention"><span class="octicon octicon-link"></span></a>Filename-to-Namespace Mapping Convention</h3>
+
+<p>Note that we use <code>my-stuff.core</code> instead of just <code>my-stuff</code> since
+single-segment namespaces are discouraged in Clojure. Also note that
+namespaces with dashes in the name will have the corresponding file
+named with underscores instead since the JVM has trouble loading files
+with dashes in the name. The intricacies of namespaces are a common
+source of confusion for newcomers, and while they are mostly outside
+the scope of this tutorial you can
+<a href="http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html">read up on them elsewhere</a>.</p>
+
+<h2>
+<a name="user-content-projectclj" class="anchor" href="#projectclj"><span class="octicon octicon-link"></span></a>project.clj</h2>
+
+<p>Your <code>project.clj</code> file will start off looking something like this:</p>
+
+<div class="highlight highlight-clj"><pre><span class="p">(</span><span class="kd">defproject </span><span class="nv">my-stuff</span> <span class="s">"0.1.0-SNAPSHOT"</span>
+  <span class="ss">:description</span> <span class="s">"FIXME: write description"</span>
+  <span class="ss">:url</span> <span class="s">"http://example.com/FIXME"</span>
+  <span class="ss">:license</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">"Eclipse Public License"</span>
+            <span class="ss">:url</span> <span class="s">"http://www.eclipse.org/legal/epl-v10.html"</span><span class="p">}</span>
+  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.5.1"</span><span class="p">]]</span>
+  <span class="ss">:main</span> <span class="o">^</span><span class="ss">:skip-aot</span> <span class="nv">my-stuff.core</span>
+  <span class="ss">:target-path</span> <span class="s">"target/%s"</span>
+  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:uberjar</span> <span class="p">{</span><span class="ss">:aot</span> <span class="ss">:all</span><span class="p">}})</span>
+</pre></div>
+
+<p>If you don't fill in the <code>:description</code> with a short sentence, your
+project will be harder to find in search results, so start there. Be
+sure to fix the <code>:url</code> as well. At some point you'll need to flesh out
+the <code>README.md</code> file too, but for now let's skip ahead to setting
+<code>:dependencies</code>. Note that Clojure is just another dependency here.
+Unlike most languages, it's easy to swap out any version of Clojure.</p>
+
+<h2>
+<a name="user-content-dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h2>
+
+<h3>
+<a name="user-content-overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
+
+<p>Clojure is a hosted language and Clojure libraries are distributed the same
+way as in other JVM languages: as jar files.</p>
+
+<p>Jar files are basically just <code>.zip</code> files with a little extra JVM-specific
+metadata. They usually contain <code>.class</code> files (JVM bytecode) and <code>.clj</code> source
+files, but they can also contain other things like config
+files, JavaScript files or text files with static data.</p>
+
+<p>Published JVM libraries have <em>identifiers</em> (artifact group, artifact id) and
+<em>versions</em>.</p>
+
+<h3>
+<a name="user-content-artifact-ids-groups-and-versions" class="anchor" href="#artifact-ids-groups-and-versions"><span class="octicon octicon-link"></span></a>Artifact IDs, Groups, and Versions</h3>
+
+<p>You can <a href="http://clojars.org/search?q=clj-http">search Clojars</a> using
+its web interface or via <code>lein search $TERM</code>. On the Clojars page for
+<code>clj-http</code> at the time of this writing it shows this:</p>
+
+<pre><code>[clj-http "0.9.1"]
+</code></pre>
+
+<p>It also shows the Maven syntax for dependencies, which we'll skip for
+now, though you'll need to learn to read it when looking for Java
+libraries from <a href="http://search.maven.org/">Central</a>. You can copy the
+Leiningen version directly into the <code>:dependencies</code> vector in
+<code>project.clj</code>.  So for instance, if you change the <code>:dependencies</code>
+line in the example <code>project.clj</code> above to</p>
+
+<div class="highlight highlight-clj"><pre><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.5.1"</span><span class="p">]</span>
+               <span class="p">[</span><span class="nv">clj-http</span> <span class="s">"0.9.1"</span><span class="p">]]</span>
+</pre></div>
+
+<p>Leiningen will automatically download the <code>clj-http</code> jar and make sure
+it is on your classpath. If you want to explicitly tell lein to
+download new dependencies, you can do so with <code>lein deps</code>, but it will
+happen on-demand if you don't.</p>
+
+<p>Within the vector, "clj-http" is referred to as the "artifact id".
+"0.9.1" is the version. Some libraries will also have "group ids",
+which are displayed like this:</p>
+
+<div class="highlight highlight-clj"><pre><span class="p">[</span><span class="nv">com.cedarsoft.utils.legacy/hibernate</span> <span class="s">"1.3.4"</span><span class="p">]</span>
+</pre></div>
+
+<p>The group id is the part before the slash. Especially for Java
+libraries, it's often a reversed domain name. Clojure libraries often
+use the same group-id and artifact-id (as with clj-http), in which case
+you can omit the group-id. If there is a library that's part of a
+larger group (such as <code>ring-jetty-adapter</code> being part of the <code>ring</code>
+project), the group-id is often the same across all the sub-projects.</p>
+
+<h3>
+<a name="user-content-snapshot-versions" class="anchor" href="#snapshot-versions"><span class="octicon octicon-link"></span></a>Snapshot Versions</h3>
+
+<p>Sometimes versions will end in "-SNAPSHOT". This means that it is not
+an official release but a development build. Relying on snapshot
+dependencies is discouraged but is sometimes necessary if you need bug
+fixes, etc. that have not made their way into a release yet. However,
+snapshot versions are not guaranteed to stick around, so it's
+important that non-development releases never depend upon snapshot versions that
+you don't control. Adding a snapshot dependency to your project will
+cause Leiningen to actively go seek out the latest version of the
+dependency daily (whereas normal release versions are cached in the local
+repository) so if you have a lot of snapshots it will slow things
+down.</p>
+
+<p>Note that some libraries make their group-id and artifact-id
+correspond with the namespace they provide inside the jar, but this is
+just a convention. There is no guarantee they will match up at all, so
+consult the library's documentation before writing your <code>:require</code>
+and <code>:import</code> clauses.</p>
+
+<h3>
+<a name="user-content-repositories" class="anchor" href="#repositories"><span class="octicon octicon-link"></span></a>Repositories</h3>
+
+<p>Dependencies are stored in <em>artifact repositories</em>. If you are
+familiar with Perl's CPAN, Python's Cheeseshop (aka PyPi), Ruby's
+rubygems.org, or Node.js's NPM, it's the same thing. Leiningen reuses
+existing JVM repository infrastructure. There are several popular
+open source repositories. Leiningen by default will use two of them:
+<a href="http://clojars.org/">clojars.org</a> and
+<a href="http://search.maven.org/">Maven Central</a>.</p>
+
+<p><a href="https://clojars.org/">Clojars</a> is the Clojure community's centralized
+maven repository, while <a href="http://search.maven.org/">Central</a> is for the
+wider JVM community.</p>
+
+<p>You can add third-party repositories by setting the <code>:repositories</code> key
+in project.clj. See the
+<a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj">sample.project.clj</a>.</p>
+
+<h3>
+<a name="user-content-checkout-dependencies" class="anchor" href="#checkout-dependencies"><span class="octicon octicon-link"></span></a>Checkout Dependencies</h3>
+
+<p>Sometimes it is necessary to develop two projects in parallel but it
+is very inconvenient to run <code>lein install</code> and restart your repl all
+the time to get your changes picked up. Leiningen provides a solution
+called <em>checkout dependencies</em> (or just <em>checkouts</em>). To use it,
+create a directory called <code>checkouts</code> in the project root, like so:</p>
+
+<pre><code>.
+|-- project.clj
+|-- README.md
+|-- checkouts
+|-- src
+|   `-- my_stuff
+|       `-- core.clj
+`-- test
+    `-- my_stuff
+        `-- core_test.clj
+</code></pre>
+
+<p>Then, under the checkouts directory, create symlinks to projects you need.</p>
+
+<pre><code>.
+|-- project.clj
+|-- README.md
+|-- checkouts
+|   `-- superlib2 [link to ~/code/oss/superlib2]
+|   `-- superlib3 [link to ~/code/megacorp/superlib3]
+|-- src
+|   `-- my_stuff
+|       `-- core.clj
+`-- test
+    `-- my_stuff
+        `-- core_test.clj
+</code></pre>
+
+<p>Libraries located under the <code>checkouts</code> directory take precedence
+over libraries pulled from repositories, but this is not a replacement
+for listing the project in your main project's <code>:dependencies</code>; it
+simply supplements that for convenience. If you have a project in
+<code>checkouts</code> without putting it in <code>:dependencies</code> then its source will
+be visible but its dependencies will not be found. If you change the
+dependencies of a checkout project you will still have to run <code>lein
+install</code> and restart your repl; it's just that source changes will be
+picked up immediately.</p>
+
+<p>After you've updated <code>:dependencies</code>, <code>lein</code> will still need to be able
+to find the library in some repository like clojars or your <code>~/.m2</code>
+directory.  If <code>lein</code> complains that it could not find the library
+artifact, you can install it locally by running <code>lein install</code> in the
+checkout dependency project directory.</p>
+
+<p>Checkouts are an opt-in feature; not everyone who is working on the
+project will have the same set of checkouts, so your project should
+work without checkouts before you push or merge.</p>
+
+<h3>
+<a name="user-content-search" class="anchor" href="#search"><span class="octicon octicon-link"></span></a>Search</h3>
+
+<p>Leiningen supports searching remote Maven repositories for matching
+jars with the command <code>lein search $TERM</code>. The first time <code>lein search</code>
+is run, a set of indices are downloaded. Once this is finished, the query
+is evaluated as a Lucene search. This allows for simple string matching
+or strings prefixed with one of the following operators:</p>
+
+<ul class="task-list">
+<li>
+<code>artifact-id</code>, <code>artifact\_id</code>, <code>id</code>, <code>a</code>
+</li>
+<li>
+<code>group-id</code>, <code>group\_id</code>, <code>group</code>, <code>g</code>
+</li>
+<li>
+<code>description</code>, <code>desc</code>, <code>d</code>
+</li>
+</ul><p>These prefixes allow you to execute more advanced queries such as:</p>
+
+<pre><code>$ lein search clojure
+$ lein search description:crawl
+$ lein search group:clojurewerkz
+$ lein search \"Riak client\"
+</code></pre>
+
+<p><code>lein search</code> also accepts a second, optional parameter for fetching
+successive pages, e.g. <code>lein search clojure 2</code>.</p>
+
+<h2>
+<a name="user-content-running-code" class="anchor" href="#running-code"><span class="octicon octicon-link"></span></a>Running Code</h2>
+
+<p>Enough setup; let's see some code running. Start with a REPL
+(read-eval-print loop):</p>
+
+<pre><code>$ lein repl
+nREPL server started on port 55568 on host 127.0.0.1 - nrepl://127.0.0.1:55568
+REPL-y 0.3.0
+Clojure 1.5.1
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
+
+user=&gt;
+</code></pre>
+
+<p>The REPL is an interactive prompt where you can enter arbitrary code
+to run in the context of your project. Since we've added <code>clj-http</code> to
+<code>:dependencies</code>, we are able to load it here along with code from the
+<code>my-stuff.core</code> namespace in your project's own <code>src/</code> directory:</p>
+
+<pre><code>user=&gt; (require 'my-stuff.core)
+nil
+user=&gt; (my-stuff.core/-main)
+Hello, World!
+nil
+user=&gt; (require '[clj-http.client :as http])
+nil
+user=&gt; (def response (http/get "http://leiningen.org"))
+#'user/response
+user=&gt; (keys response)
+(:trace-redirects :status :headers :body)
+</code></pre>
+
+<p>The call to <code>-main</code> shows both println output ("Hello, World!") and
+the return value (nil) together.</p>
+
+<p>Built-in documentation is available via <code>doc</code>, and you can examine the
+source of functions with <code>source</code>:</p>
+
+<pre><code>user=&gt; (source my-stuff.core/-main)
+(defn -main
+  "I don't do a whole lot."
+  [&amp; args]
+  (println "Hello, World!"))
+
+user=&gt; ; use control+d to exit
+</code></pre>
+
+<p>If you already have code in a <code>-main</code> function ready to go and don't
+need to enter code interactively, the <code>run</code> task is simpler:</p>
+
+<pre><code>$ lein run
+Hello, World!
+</code></pre>
+
+<p>Providing a <code>-m</code> argument will tell Leiningen to look for
+the <code>-main</code> function in another namespace. Setting a default <code>:main</code> in
+<code>project.clj</code> lets you omit <code>-m</code>.</p>
+
+<p>For long-running <code>lein run</code> processes, you may wish to save memory
+with the higher-order trampoline task, which allows the Leiningen JVM
+process to exit before launching your project's JVM.</p>
+
+<pre><code>$ lein trampoline run -m my-stuff.server 5000
+</code></pre>
+
+<p>If you have any Java to be compiled in <code>:java-source-paths</code> or Clojure
+namespaces listed in <code>:aot</code>, they will always be compiled before
+Leiningen runs any other code, via any <code>run</code>, <code>repl</code>,
+etc. invocations.</p>
+
+<h2>
+<a name="user-content-tests" class="anchor" href="#tests"><span class="octicon octicon-link"></span></a>Tests</h2>
+
+<p>We haven't written any tests yet, but we can run the failing tests
+included from the project template:</p>
+
+<pre><code>$ lein test
+
+lein test my-stuff.core-test
+
+lein test :only my-stuff.core-test/a-test
+
+FAIL in (a-test) (core_test.clj:7)
+FIXME, I fail.
+expected: (= 0 1)
+  actual: (not (= 0 1))
+
+Ran 1 tests containing 1 assertions.
+1 failures, 0 errors.
+Tests failed.
+</code></pre>
+
+<p>Once we fill it in the test suite will become more useful. Sometimes
+if you've got a large test suite you'll want to run just one or two
+namespaces at a time; <code>lein test my-stuff.core-test</code> will do that. You
+also might want to break up your tests using test selectors; see <code>lein
+help test</code> for more details.</p>
+
+<p>Running <code>lein test</code> from the command-line is suitable for regression
+testing, but the slow startup time of the JVM makes it a poor fit for
+testing styles that require tighter feedback loops. In these cases,
+either keep a repl open for running the appropriate call to
+<a href="http://clojuredocs.org/clojure_core/1.3.0/clojure.test/run-tests">clojure.test/run-tests</a>
+or look into editor integration such as
+<a href="https://github.com/technomancy/clojure-mode">clojure-test-mode</a>.</p>
+
+<p>Keep in mind that while keeping a running process around is convenient,
+it's easy for that process to get into a state that doesn't reflect
+the files on disk—functions that are loaded and then deleted from the
+file will remain in memory, making it easy to miss problems arising
+from missing functions (often referred to as "getting
+slimed"). Because of this it's advised to do a <code>lein test</code> run with a
+fresh instance periodically in any case, perhaps before you commit.</p>
+
+<h2>
+<a name="user-content-profiles" class="anchor" href="#profiles"><span class="octicon octicon-link"></span></a>Profiles</h2>
+
+<p>Profiles are used to add various things into your project map in
+different contexts. For instance, during <code>lein test</code> runs, the
+contents of the <code>:test</code> profile, if present, will be merged into your
+project map. You can use this to enable configuration that should only
+be applied during test runs, either by adding directories containing
+config files to your classpath via <code>:resource-paths</code> or by other
+means. See <code>lein help profiles</code> for more details.</p>
+
+<p>Unless you tell it otherwise, Leiningen will merge the default set of
+profiles into the project map. This includes user-wide settings from
+your <code>:user</code> profile, the <code>:dev</code> profile from <code>project.clj</code> if
+present, and the built-in <code>:base</code> profile which contains dev tools
+like nREPL and optimizations which help startup time at the expense of
+runtime performance. Never benchmark with the default profiles. (See
+the FAQ entry for "tiered compilation")</p>
+
+<h2>
+<a name="user-content-what-to-do-with-it" class="anchor" href="#what-to-do-with-it"><span class="octicon octicon-link"></span></a>What to do with it</h2>
+
+<p>Generally speaking, there are three different goals that are typical
+of Leiningen projects:</p>
+
+<ul class="task-list">
+<li>An application you can distribute to end-users</li>
+<li>A server-side application</li>
+<li>A library for other Clojure projects to consume</li>
+</ul><p>For the first, you typically build an uberjar. For libraries, you will
+want to have them published to a repository like Clojars or a private
+repository. For server-side applications it varies as described below.
+Generating a project with <code>lein new app myapp</code> will start you out with
+a few extra defaults suitable for non-library projects, or you can
+browse the
+<a href="https://clojars.org/search?q=lein-template">available templates on Clojars</a>
+for things like specific web technologies or other project types.</p>
+
+<h3>
+<a name="user-content-uberjar" class="anchor" href="#uberjar"><span class="octicon octicon-link"></span></a>Uberjar</h3>
+
+<p>The simplest thing to do is to distribute an uberjar. This is a single
+standalone executable jar file most suitable for giving to
+nontechnical users. For this to work you'll need to specify a
+namespace as your <code>:main</code> in <code>project.clj</code> and ensure it's also AOT (Ahead Of Time)
+compiled by adding it to <code>:aot</code>. By this point our <code>project.clj</code> file
+should look like this:</p>
+
+<div class="highlight highlight-clj"><pre><span class="p">(</span><span class="kd">defproject </span><span class="nv">my-stuff</span> <span class="s">"0.1.0-SNAPSHOT"</span>
+  <span class="ss">:description</span> <span class="s">"FIXME: write description"</span>
+  <span class="ss">:url</span> <span class="s">"http://example.com/FIXME"</span>
+  <span class="ss">:license</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">"Eclipse Public License"</span>
+            <span class="ss">:url</span> <span class="s">"http://www.eclipse.org/legal/epl-v10.html"</span><span class="p">}</span>
+  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.3.0"</span><span class="p">]</span>
+                 <span class="p">[</span><span class="nv">org.apache.lucene/lucene-core</span> <span class="s">"3.0.2"</span><span class="p">]</span>
+                 <span class="p">[</span><span class="nv">clj-http</span> <span class="s">"0.9.1"</span><span class="p">]]</span>
+  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">ring/ring-devel</span> <span class="s">"1.2.0"</span><span class="p">]]}}</span>
+  <span class="ss">:test-selectors</span> <span class="p">{</span><span class="ss">:default</span> <span class="p">(</span><span class="nb">complement </span><span class="ss">:integration</span><span class="p">)</span>
+                  <span class="ss">:integration</span> <span class="ss">:integration</span>
+                  <span class="ss">:all</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="nv">true</span><span class="p">)}</span>
+  <span class="ss">:main</span> <span class="nv">my.stuff</span>
+  <span class="ss">:aot</span> <span class="p">[</span><span class="nv">my.stuff</span><span class="p">])</span>
+</pre></div>
+
+<p>The namespace you specify will need to contain a <code>-main</code> function that
+will get called when your standalone jar is run. This namespace should
+have a <code>(:gen-class)</code> declaration in the <code>ns</code> form at the top. The
+<code>-main</code> function will get passed the command-line arguments. Let's try
+something simple in <code>src/my/stuff.clj</code>:</p>
+
+<div class="highlight highlight-clj"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">my.stuff</span>
+  <span class="p">(</span><span class="ss">:gen-class</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">println </span><span class="s">"Welcome to my project! These are your args:"</span> <span class="nv">args</span><span class="p">))</span>
+</pre></div>
+
+<p>Now we're ready to generate your uberjar:</p>
+
+<pre><code>$ lein uberjar
+Compiling my.stuff
+Compilation succeeded.
+Created /home/phil/src/leiningen/my-stuff/target/my-stuff-0.1.0-SNAPSHOT.jar
+Including my-stuff-0.1.0-SNAPSHOT.jar
+Including clj-http-0.9.1.jar
+Including clojure-1.3.0.jar
+Including lucene-core-3.0.2.jar
+Created /home/phil/src/leiningen/my-stuff/target/my-stuff-0.1.0-SNAPSHOT-standalone.jar
+</code></pre>
+
+<p>This creates a single jar file that contains the contents of all your
+dependencies. Users can run it with a simple <code>java</code> invocation,
+or on some systems just by double-clicking the jar file.</p>
+
+<pre><code>$ java -jar my-stuff-0.1.0-standalone.jar Hello world.
+Welcome to my project! These are your args: (Hello world.)
+</code></pre>
+
+<p>You can run a regular (non-uber) jar with the <code>java</code>
+command-line tool, but that requires constructing the classpath
+yourself, so it's not a good solution for end-users.</p>
+
+<p>Of course if your users already have Leiningen installed, you can
+instruct them to use <code>lein run</code> as described above.</p>
+
+<h3>
+<a name="user-content-framework-uberjars" class="anchor" href="#framework-uberjars"><span class="octicon octicon-link"></span></a>Framework (Uber)jars</h3>
+
+<p>Many Java frameworks expect deployment of a jar file or derived archive
+sub-format containing a subset of the application's necessary
+dependencies.  The framework expects to provide the missing dependencies
+itself at run-time.  Dependencies which are provided by a framework in
+this fashion may be specified in the <code>:provided</code> profile.  Such
+dependencies will be available during compilation, testing, etc., but
+won't be included by default by the <code>uberjar</code> task or plugin tasks
+intended to produce stable deployment artifacts.</p>
+
+<p>For example, Hadoop job jars may be just regular (uber)jar files
+containing all dependencies except the Hadoop libraries themselves:</p>
+
+<div class="highlight highlight-clj"><pre><span class="p">(</span><span class="nb">project </span><span class="nv">example.hadoop</span> <span class="s">"0.1.0"</span>
+  <span class="nv">...</span>
+  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:provided</span>
+             <span class="p">{</span><span class="ss">:dependencies</span>
+              <span class="p">[[</span><span class="nv">org.apache.hadoop/hadoop-core</span> <span class="s">"0.20.2-dev"</span><span class="p">]]}}</span>
+  <span class="ss">:main</span> <span class="nv">example.hadoop</span><span class="p">)</span>
+</pre></div>
+
+<pre><code>$ lein uberjar
+Compiling example.hadoop
+Created /home/xmpl/src/example.hadoop/example.hadoop-0.1.0.jar
+Including example.hadoop-0.1.0.jar
+Including clojure-1.4.0.jar
+Created /home/xmpl/src/example.hadoop/example.hadoop-0.1.0-standalone.jar
+$ hadoop jar example.hadoop-0.1.0-standalone.jar
+12/08/24 08:28:30 INFO util.Util: resolving application jar from found main method on: example.hadoop
+12/08/24 08:28:30 INFO flow.MultiMapReducePlanner: using application jar: /home/xmpl/src/example.hadoop/./example.hadoop-0.1.0-standalone.jar
+...
+</code></pre>
+
+<p>Plugins are required to generate framework deployment jar derivatives
+(such as WAR files) which include additional metadata, but the
+<code>:provided</code> profile provides a general mechanism for handling the
+framework dependencies.</p>
+
+<h3>
+<a name="user-content-server-side-projects" class="anchor" href="#server-side-projects"><span class="octicon octicon-link"></span></a>Server-side Projects</h3>
+
+<p>There are many ways to get your project deployed as a server-side
+application. Aside from the obvious uberjar approach, simple
+programs can be packaged up as tarballs with accompanied shell scripts
+using the <a href="https://github.com/technomancy/lein-tar">lein-tar plugin</a>
+and then deployed using
+<a href="http://hugoduncan.github.com/pallet/">pallet</a>,
+<a href="http://opscode.com/chef/">chef</a>, or other mechanisms.
+Web applications may be deployed as uberjars using embedded Jetty with
+<code>ring-jetty-adapter</code> or as .war (web application archive) files
+created by the
+<a href="https://github.com/weavejester/lein-ring">lein-ring plugin</a>. For
+things beyond uberjars, server-side deployments are so varied that they
+are better-handled using plugins rather than tasks that are built-in
+to Leiningen itself.</p>
+
+<p>It's possible to involve Leiningen during production, but there are
+many subtle gotchas to that approach; it's strongly recommended to use
+an uberjar if you can. If you need to launch with the <code>run</code> task, you
+should use <code>lein trampoline run</code> in order to save memory, otherwise
+Leiningen's own JVM will stay up and consume unnecessary memory.</p>
+
+<p>In addition it's very important to ensure you take steps to freeze all
+the dependencies before deploying, otherwise it could be easy to end
+up with
+<a href="https://github.com/technomancy/leiningen/wiki/Repeatability">unrepeatable deployments</a>.
+Consider including <code>~/.m2/repository</code> in your unit of deployment
+(tarball, .deb file, etc) along with your project code. It's
+recommended to use Leiningen to create a deployable artifact in a
+continuous integration setting. For example, you could have a
+<a href="http://jenkins-ci.org/">Jenkins</a> CI server run your project's full
+test suite, and if it passes, upload a tarball to S3.  Then deployment
+is just a matter of pulling down and extracting the known-good tarball
+on your production servers. Simply launching Leiningen from a checkout
+on the server will work for the most basic deployments, but as soon as
+you get a number of servers you run the risk of running with a
+heterogeneous cluster since you're not guaranteed that each machine
+will be running with the exact same codebase.</p>
+
+<p>Also remember that the default profiles are included unless you
+specify otherwise, which is not suitable for production. Using <code>lein
+trampoline with-profile production run -m myapp.main</code> is
+recommended. By default the production profile is empty, but if your
+deployment includes the <code>~/.m2/repository</code> directory from the CI run
+that generated the tarball, then you should add its path as
+<code>:local-repo</code> along with <code>:offline? true</code> to the <code>:production</code>
+profile. Staying offline prevents the deployed project from diverging
+at all from the version that was tested in the CI environment.</p>
+
+<p>Given these pitfalls, it's best to use an uberjar if possible.</p>
+
+<h3>
+<a name="user-content-publishing-libraries" class="anchor" href="#publishing-libraries"><span class="octicon octicon-link"></span></a>Publishing Libraries</h3>
+
+<p>If your project is a library and you would like others to be able to
+use it as a dependency in their projects, you will need to get it into
+a public repository. While it's possible to
+<a href="https://github.com/technomancy/leiningen/blob/stable/doc/DEPLOY.md">maintain your own private repository</a>
+or get it into <a href="http://search.maven.org/">Central</a>, the easiest way is
+to publish it at <a href="http://clojars.org/">Clojars</a>. Once you have
+<a href="https://clojars.org/register">created an account</a> there, publishing
+is easy:</p>
+
+<pre><code>$ lein deploy clojars
+Created ~/src/my-stuff/target/my-stuff-0.1.0-SNAPSHOT.jar
+Wrote ~/src/my-stuff/pom.xml
+No credentials found for clojars
+See `lein help deploying` for how to configure credentials.
+Username: me
+Password:
+Retrieving my-stuff/my-stuff/0.1.0-SNAPSHOT/maven-metadata.xml (1k)
+    from https://clojars.org/repo/
+Sending my-stuff/my-stuff/0.1.0-SNAPSHOT/my-stuff-0.1.0-20120531.032047-14.jar (5k)
+    to https://clojars.org/repo/
+Sending my-stuff/my-stuff/0.1.0-SNAPSHOT/my-stuff-0.1.0-20120531.032047-14.pom (3k)
+    to https://clojars.org/repo/
+Retrieving my-stuff/my-stuff/maven-metadata.xml (1k)
+    from https://clojars.org/repo/
+Sending my-stuff/my-stuff/0.1.0-SNAPSHOT/maven-metadata.xml (1k)
+    to https://clojars.org/repo/
+Sending my-stuff/my-stuff/maven-metadata.xml (1k)
+    to https://clojars.org/repo/
+</code></pre>
+
+<p>Once that succeeds it will be available as a package on which other
+projects may depend. For instructions on storing your credentials so
+they don't have to be re-entered every time, see <code>lein help
+deploying</code>. When deploying a release that's not a snapshot, Leiningen
+will attempt to sign it using <a href="http://gnupg.org/">GPG</a> to prove your
+authorship of the release. See the
+<a href="https://github.com/technomancy/leiningen/blob/stable/doc/DEPLOY.md">deploy guide</a>.
+for details of how to set that up. The deploy guide includes
+instructions for deploying to other repositories as well.</p>
+
+<h2>
+<a name="user-content-thats-it" class="anchor" href="#thats-it"><span class="octicon octicon-link"></span></a>That's It!</h2>
+
+<p>Now go start coding your next project!</p></article>
+  </div>
+
+  </div>
+</div>
+
+<a href="#jump-to-line" rel="facebox[.linejump]" data-hotkey="l" class="js-jump-to-line" style="display:none">Jump to Line</a>
+<div id="jump-to-line" style="display:none">
+  <form accept-charset="UTF-8" class="js-jump-to-line-form">
+    <input class="linejump-input js-jump-to-line-field" placeholder="Jump to line…" autofocus="" type="text">
+    <button type="submit" class="button">Go</button>
+  </form>
+</div>
+
+        </div>
+
+      </div><!-- /.repo-container -->
+      <div class="modal-backdrop"></div>
+    </div><!-- /.container -->
+  </div><!-- /.site -->
+
+
+    </div><!-- /.wrapper -->
+
+      <div class="container">
+  <div class="site-footer">
+    <ul class="site-footer-links right">
+      <li><a href="https://status.github.com/">Status</a></li>
+      <li><a href="http://developer.github.com/">API</a></li>
+      <li><a href="http://training.github.com/">Training</a></li>
+      <li><a href="http://shop.github.com/">Shop</a></li>
+      <li><a href="https://github.com/blog">Blog</a></li>
+      <li><a href="https://github.com/about">About</a></li>
+
+    </ul>
+
+    <a href="https://github.com/">
+      <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+    </a>
+
+    <ul class="site-footer-links">
+      <li>© 2014 <span title="0.06667s from github-fe131-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy">Privacy</a></li>
+        <li><a href="https://github.com/security">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+    </ul>
+  </div><!-- /.site-footer -->
+</div><!-- /.container -->
+
+
+    <div class="fullscreen-overlay js-fullscreen-overlay" id="fullscreen_overlay">
+  <div class="fullscreen-container js-fullscreen-container">
+    <div class="textarea-wrap">
+      <textarea name="fullscreen-contents" id="fullscreen-contents" class="fullscreen-contents js-fullscreen-contents" placeholder="" data-suggester="fullscreen_suggester"></textarea>
+    </div>
+  </div>
+  <div class="fullscreen-sidebar">
+    <a href="#" class="exit-fullscreen js-exit-fullscreen tooltipped tooltipped-w" aria-label="Exit Zen Mode">
+      <span class="mega-octicon octicon-screen-normal"></span>
+    </a>
+    <a href="#" class="theme-switcher js-theme-switcher tooltipped tooltipped-w" aria-label="Switch themes">
+      <span class="octicon octicon-color-mode"></span>
+    </a>
+  </div>
+</div>
+
+
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <a href="#" class="octicon octicon-x close js-ajax-error-dismiss"></a>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      <script crossorigin="anonymous" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/frameworks-31cf39cf6a61d4c498cba6c0e9c100fb2b06b2f8.js" type="text/javascript"></script>
+      <script async="async" crossorigin="anonymous" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/github-3ce38bb3847507f17846ba0a46d52f1b39114512.js" type="text/javascript"></script>
+      
+      
+        <script async="" src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/analytics.js"></script>
+  
+
+
+<div style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" class="global-zeroclipboard-container" id="global-zeroclipboard-html-bridge">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" height="100%" width="100%">         <param name="movie" value="https://assets-cdn.github.com/flash/ZeroClipboard.v1.3.2.swf">         <param name="allowScriptAccess" value="always">         <param name="scale" value="exactfit">         <param name="loop" value="false">         <param name="menu" value="false">         <param name="quality" value="best">         <param name="bgcolor" value="#ffffff">         <param name="wmode" value="transparent">         <param name="flashvars" value="trustedOrigins=github.com%2C%2F%2Fgithub.com%2Chttps%3A%2F%2Fgithub.com%2Cgithub.com%2C%2F%2Fgithub.com%2Chttps%3A%2F%2Fgithub.com">         <embed src="leiningen_doc_TUTORIAL.md%20at%20master%20%C2%B7%20technomancy_leiningen_fichiers/ZeroClipboard.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" name="global-zeroclipboard-flash-bridge" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=github.com%2C%2F%2Fgithub.com%2Chttps%3A%2F%2Fgithub.com%2Cgithub.com%2C%2F%2Fgithub.com%2Chttps%3A%2F%2Fgithub.com" scale="exactfit" height="100%" width="100%">                </object></div>    <div class="facebox" id="facebox" style="display:none;">       <div class="facebox-popup">         <div class="facebox-content">         </div>         <button type="button" class="facebox-close js-facebox-close">           <span class="octicon octicon-remove-close"></span>         </button>       </div>     </div></body></html>

@@ -88,12 +88,16 @@
       (apply-by next-time play [next-time (rest notes) sep]))))
 
 ;; play some pitches
-(play (now) pitches 200)
-
+(defn playnow  [& args] (play (now) pitches 200))
 ;; cycle through some pitches
 ;; this will loop indefinitely.
+
+
+(defn testson [& args]
 (let [t (+ 500 (now))]
   (play t (cycle pitches) 100)
-  (play t (cycle pitches) 102))
+  (play t (cycle pitches) 102)) )
 
 (stop)
+
+(defn -main [& args] (testson))

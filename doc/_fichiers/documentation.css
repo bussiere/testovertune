@@ -1,0 +1,536 @@
+/* line 17, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 61, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+* html {
+  font-size: 100%;
+}
+
+/* line 64, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 16px;
+  line-height: 1.6875em;
+}
+
+/* line 14, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/susy-1.0.9/sass/susy/_grid.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 57, content/assets/stylesheets/documentation.scss */
+.mono, pre, code, tt {
+  font-family: "Bitstream Vera Sans Mono", monospace;
+}
+
+/* line 61, content/assets/stylesheets/documentation.scss */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* line 66, content/assets/stylesheets/documentation.scss */
+h1, h2, h3, h4 {
+  font-family: 'Gentium Book Basic', serif;
+  font-weight: bold;
+}
+
+/* line 71, content/assets/stylesheets/documentation.scss */
+h1 {
+  font-size: 2.5em;
+  line-height: 1.35em;
+  margin-bottom: 0.675em;
+}
+
+/* line 77, content/assets/stylesheets/documentation.scss */
+p {
+  margin-top: 1.6875em;
+  margin-bottom: 1.6875em;
+}
+
+/* line 82, content/assets/stylesheets/documentation.scss */
+strong {
+  font-weight: bold;
+}
+
+/* line 86, content/assets/stylesheets/documentation.scss */
+em {
+  font-style: italic;
+}
+
+/* line 90, content/assets/stylesheets/documentation.scss */
+a {
+  text-decoration: none;
+  color: #7694a8;
+}
+/* line 93, content/assets/stylesheets/documentation.scss */
+a:hover {
+  text-decoration: underline;
+}
+/* line 94, content/assets/stylesheets/documentation.scss */
+a:visited {
+  color: #8976a8;
+}
+
+/* line 101, content/assets/stylesheets/documentation.scss */
+pre {
+  margin-bottom: 1.6875em;
+  margin-top: 1.6875em;
+  padding-top: 0.84375em;
+  padding-bottom: 0.84375em;
+  overflow-x: auto;
+}
+
+/* line 109, content/assets/stylesheets/documentation.scss */
+code {
+  background: #fff4ea;
+  font-size: 14px;
+}
+
+/* line 114, content/assets/stylesheets/documentation.scss */
+.code {
+  background: #f9f9f9;
+  line-height: 1.25em;
+  font-size: 14px;
+}
+
+/* line 123, content/assets/stylesheets/documentation.scss */
+.content li {
+  margin-left: 1.2em;
+}
+/* line 127, content/assets/stylesheets/documentation.scss */
+.content ul li {
+  list-style: disc;
+}
+/* line 131, content/assets/stylesheets/documentation.scss */
+.content ol > li {
+  list-style: decimal;
+}
+/* line 135, content/assets/stylesheets/documentation.scss */
+.content img {
+  max-width: 100%;
+}
+
+/* line 140, content/assets/stylesheets/documentation.scss */
+header, footer {
+  clear: both;
+}
+
+/* line 141, content/assets/stylesheets/documentation.scss */
+header {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  *zoom: 1;
+  max-width: 61em;
+  _width: 61em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.84375em;
+  padding-bottom: 1.6875em;
+  border-top: 2px solid #f26f53;
+  color: #f26f53;
+  border-bottom: 1px solid #eee;
+}
+/* line 38, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 149, content/assets/stylesheets/documentation.scss */
+header .title {
+  font-size: 3.875em;
+  line-height: 1.30645em;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+/* line 155, content/assets/stylesheets/documentation.scss */
+header .title span {
+  font-size: 0.75806em;
+  line-height: 0.57447em;
+  font-family: 'Gentium Book Basic', serif;
+  font-style: italic;
+  font-weight: normal;
+  color: black;
+}
+/* line 163, content/assets/stylesheets/documentation.scss */
+header .title a, header .title a:link, header .title a:hover, header .title a:visited {
+  color: #f26f53;
+  text-decoration: none;
+}
+/* line 166, content/assets/stylesheets/documentation.scss */
+header .title a span, header .title a:link span, header .title a:hover span, header .title a:visited span {
+  color: black;
+}
+/* line 172, content/assets/stylesheets/documentation.scss */
+header .subtitle {
+  font-size: 1.875em;
+  line-height: 1.8em;
+  text-align: center;
+  font-family: 'Gentium Book Basic', serif;
+  font-style: italic;
+  font-weight: 200;
+  color: black;
+}
+
+/* line 194, content/assets/stylesheets/documentation.scss */
+.announcement, footer {
+  *zoom: 1;
+  max-width: 61em;
+  _width: 61em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1.6875em;
+  padding-bottom: 1.6875em;
+  text-align: center;
+}
+/* line 38, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.announcement:after, footer:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 199, content/assets/stylesheets/documentation.scss */
+.announcement .signup, footer .signup {
+  margin-left: 16.94915%;
+  width: 66.10169%;
+  float: left;
+  margin-right: 1.69492%;
+  display: inline;
+}
+
+/* line 205, content/assets/stylesheets/documentation.scss */
+.announcement {
+  border-bottom: 1px solid #eee;
+}
+
+/* line 209, content/assets/stylesheets/documentation.scss */
+footer {
+  padding-bottom: 1.6875em;
+}
+
+/* line 213, content/assets/stylesheets/documentation.scss */
+.page {
+  *zoom: 1;
+  max-width: 61em;
+  _width: 61em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid #eee;
+  background: white;
+}
+/* line 38, /Users/daniel/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.page:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 219, content/assets/stylesheets/documentation.scss */
+.page h2 {
+  font-size: 2em;
+  line-height: 1.6875em;
+  margin-top: 0.84375em;
+  margin-bottom: 0.84375em;
+  border-bottom: 1px solid #eee;
+}
+/* line 229, content/assets/stylesheets/documentation.scss */
+.page h3 {
+  font-size: 1.5em;
+  line-height: 1.125em;
+  margin-top: 1.125em;
+  margin-bottom: 1.125em;
+  border-left: 4px solid #b5c5cf;
+  padding-left: 12px;
+  margin-left: -16px;
+}
+/* line 238, content/assets/stylesheets/documentation.scss */
+.page h4 {
+  font-size: 1.25em;
+  line-height: 1.35em;
+  margin-top: 1.35em;
+  border-left: 2px solid #b5c5cf;
+  padding-left: 14px;
+  margin-left: -16px;
+}
+/* line 246, content/assets/stylesheets/documentation.scss */
+.page .content {
+  padding-top: 1.6875em;
+}
+@media (min-width: 47em) {
+  /* line 246, content/assets/stylesheets/documentation.scss */
+  .page .content {
+    width: 74.57627%;
+    float: left;
+    margin-right: 1.69492%;
+    padding-right: 1em;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* line 257, content/assets/stylesheets/documentation.scss */
+.page nav {
+  padding-top: 1.6875em;
+  padding-bottom: 3.375em;
+}
+@media (min-width: 47em) {
+  /* line 257, content/assets/stylesheets/documentation.scss */
+  .page nav {
+    width: 23.72881%;
+    float: right;
+    margin-right: 0;
+    padding-top: 1.6875em;
+    opacity: 0.7;
+  }
+  /* line 262, content/assets/stylesheets/documentation.scss */
+  .page nav:hover {
+    opacity: 1;
+  }
+}
+/* line 270, content/assets/stylesheets/documentation.scss */
+.page nav h2 {
+  font-size: 1.625em;
+  line-height: 1.03846em;
+  margin-top: 1.03846em;
+  margin-bottom: 0;
+  font-weight: normal;
+  color: #333;
+}
+/* line 278, content/assets/stylesheets/documentation.scss */
+.page nav a:hover {
+  text-decoration: none;
+}
+/* line 283, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol li {
+  display: block;
+}
+/* line 285, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol li a {
+  font-size: 1.125em;
+  line-height: 1.5em;
+  padding-bottom: 0.375em;
+  padding-top: 0.375em;
+  display: block;
+  color: #444;
+}
+/* line 291, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol li a:visited {
+  color: #444;
+}
+/* line 295, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol li a:hover {
+  color: #f26f53;
+}
+/* line 301, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol > li li a {
+  display: block;
+  padding: 0 1em;
+  font-size: 0.875em;
+  line-height: 1.92857em;
+  padding-bottom: 0.48214em;
+  padding-top: 0.48214em;
+}
+/* line 312, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol ol ol a {
+  padding-left: 2em;
+}
+/* line 315, content/assets/stylesheets/documentation.scss */
+.page nav #toc > ol ol ol ol a {
+  padding-left: 3em;
+}
+/* line 321, content/assets/stylesheets/documentation.scss */
+.page nav #search {
+  padding-top: 0.84375em;
+  padding-bottom: 0.84375em;
+  margin-left: -1em;
+  padding-left: 1em;
+}
+/* line 327, content/assets/stylesheets/documentation.scss */
+.page nav #search input {
+  padding: 3px 0;
+  font-size: 1em;
+  line-height: 1.6875em;
+  font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
+  width: 95%;
+}
+
+/* line 337, content/assets/stylesheets/documentation.scss */
+#tipue_search_content_title {
+  margin-top: 1.6875em;
+}
+
+/* line 341, content/assets/stylesheets/documentation.scss */
+table {
+  border-top: 1px solid #eee;
+}
+/* line 343, content/assets/stylesheets/documentation.scss */
+table thead {
+  display: none;
+}
+/* line 346, content/assets/stylesheets/documentation.scss */
+table td {
+  border-bottom: 1px solid #eee;
+}
+/* line 349, content/assets/stylesheets/documentation.scss */
+table td:first-child {
+  font-family: "Bitstream Vera Sans Mono", monospace;
+  white-space: pre;
+  padding: 0 1em;
+  border-right: 1px solid #eee;
+}
+/* line 355, content/assets/stylesheets/documentation.scss */
+table td:last-child {
+  padding: 0 1em;
+}
+
+/* line 360, content/assets/stylesheets/documentation.scss */
+#disqus_thread {
+  margin-top: 1.6875em;
+}
+
+/* line 364, content/assets/stylesheets/documentation.scss */
+.pagenav {
+  overflow: hidden;
+  *zoom: 1;
+  margin-top: 1.6875em;
+  border-top: 1px dotted #eee;
+  border-bottom: 1px dotted #eee;
+}
+/* line 369, content/assets/stylesheets/documentation.scss */
+.pagenav.top {
+  border-top: none;
+  margin-top: -1.6875em;
+  margin-bottom: 1.6875em;
+  margin-left: -1em;
+  margin-right: -1em;
+  padding: 0 1em;
+}
+/* line 377, content/assets/stylesheets/documentation.scss */
+.pagenav .prev {
+  float: left;
+}
+/* line 380, content/assets/stylesheets/documentation.scss */
+.pagenav .next {
+  float: right;
+}
+
+/* line 386, content/assets/stylesheets/documentation.scss */
+.ebook span {
+  font-size: 0.8125em;
+  line-height: 2.07692em;
+}
+/* line 389, content/assets/stylesheets/documentation.scss */
+.ebook .ad {
+  text-align: center;
+}
+
+/* line 394, content/assets/stylesheets/documentation.scss */
+.sticky .signup {
+  margin-bottom: 1.6875em;
+}
+/* line 396, content/assets/stylesheets/documentation.scss */
+.sticky .signup input[type=text] {
+  width: 98px;
+}
+
+/* line 401, content/assets/stylesheets/documentation.scss */
+.is-sticky .sticky {
+  padding-top: 1.6875em;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+/* line 407, content/assets/stylesheets/documentation.scss */
+small {
+  font-size: 75%;
+}
+
+/* line 411, content/assets/stylesheets/documentation.scss */
+blockquote {
+  background: #fde6e1;
+  border-left: 2px solid #f26f53;
+  padding-left: 1em;
+  font-style: italic;
+  padding-top: 0.84375em;
+  padding-bottom: 0.84375em;
+}
+/* line 419, content/assets/stylesheets/documentation.scss */
+blockquote p {
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* line 425, content/assets/stylesheets/documentation.scss */
+.page img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

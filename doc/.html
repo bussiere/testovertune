@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta path="/getting-started/">
+<!-- base href="http://www.braveclojure.com/" -->
+<title>
+      Building, Running, and The REPL
+      | Clojure for the Brave and True
+    </title>
+<link href="_fichiers/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="_fichiers/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<link href="_fichiers/css.css" rel="stylesheet" type="text/css">
+<script src="_fichiers/ga.js" async="" type="text/javascript"></script><script src="_fichiers/widgets.js" id="twitter-wjs"></script><script src="_fichiers/embed.js" async="" type="text/javascript"></script><script charset="UTF-8" async="" src="_fichiers/alfie.js"></script></head>
+<body data-twttr-rendered="true" data-spy="scroll" data-target="nav">
+    <header role="banner"><div class="title">
+        <a href="http://www.braveclojure.com/">
+          Clojure
+          <span>for the</span>
+          Brave
+          <span>and</span>
+          True
+        </a>
+      </div>
+      <div class="subtitle">
+        ( a Book for Beginners )
+      </div>
+    </header><div class="announcement">
+      <div class="signup">
+        <form action="http://flyingmachinestudios.us1.list-manage.com/subscribe/post?u=60763b0c4890c24bd055f32e6&amp;amp;id=0b40ffd1e1" class="validate" id="mc-embedded-subscribe-form" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank">
+          Spending your nights pining for the next chapter of <em>Clojure for the Brave and True</em>? Then follow <a href="https://twitter.com/nonrecursive">@nonrecursive</a> or get email updates:
+          <input class="email" id="mce-EMAIL" name="EMAIL" placeholder="email address" required="" type="email"><input class="button" id="mc-embedded-subscribe" name="subscribe" value="Get Updates" type="submit">
+</form>
+        <!-- / %p Can't bear to be without CFTBAT? <a href="https://leanpub.com/clojure-for-the-brave-and-true">Get the DRM-free PDF, epub, and mobi!</a> -->
+      </div>
+    </div>
+    <div class="page">
+      <div class="content">
+        <h1>Building, Running, and The REPL</h1>
+        
+        <p>In this chapter you'll invest a small amount of time up front to get
+        familiar with a quick, problem-free way to build and run Clojure
+        programs. There's something powerful and motivating about getting a
+        real program running. Once you can do that, you're free to experiment
+        and you can actually share your work!</p>
+        
+        <p>You'll also learn how to instantly try out code within a running
+        Clojure process using a REPL. This will allow you to quickly test your
+        understanding of the language, allowing you to learn more efficiently.</p>
+        
+        <p>In order to get there, I'll first briefly introduce Clojure. I think
+        you'll agree that that's a useful topic in a Clojure book! Next, I'll
+        cover Leiningen, the de-facto standard build tool for Clojure. By the
+        end, you'll know how to do the following:</p>
+        
+        <ul>
+<li>Create a new Clojure project with Leiningen</li>
+        <li>Build the project to create an executable jar file</li>
+        <li>Execute the jar file</li>
+        <li>Execute code in a Clojure REPL</li>
+        </ul>
+<h2 id="1__First_things_first__What_is_Clojure_">1. First things first: What is Clojure?</h2>
+        
+        <p>Clojure was forged in a mythic volcano by Rich Hickey. Using an alloy
+        of lisp, functional programming, and a lock of his own epic hair, he
+        crafted a language which has proven to be delightful yet powerful. Its
+        lisp heritage gives you the power to write code more expressively than
+        is possible in most non-lisp languages. Its distinct take on
+        functional programming will sharpen your thinking as a programmer
+        <em>and</em> give you better tools for tackling complex domains – like
+        concurrent programming – which are traditionally known to drive
+        developers into years of therapy. All of which you'll learn about in
+        this book.</p>
+        
+        <p>Clojure continues to evolve. As of this writing, it's at
+        version 1.6.alpha3 and development is going strong.</p>
+        
+        <p>When talking about Clojure, it's important to keep in mind that Clojure
+        is actually two things! They are:</p>
+        
+        <ul>
+<li>Clojure the Language
+        
+        <ul>
+<li>Lisp dialect with functional emphasis</li>
+        <li>Great support for concurrency and asynchronous programming</li>
+        <li>Path to enlightenment, etc.</li>
+        </ul>
+</li>
+        <li>Clojure the Compiler
+        
+        <ul>
+<li>An executable JAR, <code>clojure.jar</code>
+</li>
+        <li>Takes code written in Clojure the Language and compiles it to
+        Java Virtual Machine (JVM) bytecode</li>
+        <li>Source of confusion</li>
+        </ul>
+</li>
+        </ul>
+<p>This distinction is necessary because, unlike most programming
+        languages - Ruby, Python, C, a bazillion others - Clojure is a <em>hosted
+        language</em>. Clojure programs are executed within a Java Virtual Machine
+        and rely on the JVM for core features like threading and garbage
+        collection. We'll explore the relationship between Clojure and the JVM
+        more later on, but for now the main thing you need to understand is
+        this:</p>
+        
+        <ul>
+<li>The JVM executes Java bytecode. For example, you can view the Java
+        programming language as a DSL for emitting Java bytecode.</li>
+        <li>JAR files contain Java bytecode. You can refer to JAR files as Java
+        programs.</li>
+        <li>There is a Java program, <code>clojure.jar</code>, which, when executed, reads
+        Clojure source code and produces Java bytecode.</li>
+        <li>That Java bytecode then gets executed by the JVM process which is
+        already running <code>clojure.jar</code>.</li>
+        </ul>
+<p>Now that we've got our heads straight regarding what Clojure is, let's
+        actually build a freakin' Clojure program!</p>
+        
+        <h2 id="2__Leiningen">2. Leiningen</h2>
+        
+        <p>Leiningen is a Clojure program which has become the de-facto standard
+        build tool for Clojure. You can read a <a href="http://www.flyingmachinestudios.com/programming/how-clojure-babies-are-made-what-leiningen-is/">full description of Leiningen</a>,
+        but for now we only care about using it for four things:</p>
+        
+        <ol>
+<li> Creating a new Clojure project</li>
+        <li> Running the Clojure project</li>
+        <li> Building the Clojure project</li>
+        <li> Using the REPL</li>
+        </ol>
+<p>Before going further, install Leiningen using the
+        <a href="http://leiningen.org/">instructions from the Leiningen home page</a>.</p>
+        
+        <h3 id="2_1__Creating_a_new_Clojure_Project">2.1. Creating a new Clojure Project</h3>
+        
+        <p>Let's create our first Clojure project:</p>
+        <div class="code pygments"><div class="highlight"><pre>lein new app clojure-noob</pre></div></div>
+        <p>This should create a directory structure that looks like this:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="o">|</span> <span class="p">.</span><span class="n">gitignore</span>
+<span class="o">|</span> <span class="n">doc</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">intro</span><span class="p">.</span><span class="n">md</span>
+<span class="o">|</span> <span class="n">project</span><span class="p">.</span><span class="n">clj</span>
+<span class="o">|</span> <span class="n">resources</span>
+<span class="o">|</span> <span class="n">README</span><span class="p">.</span><span class="n">md</span>
+<span class="o">|</span> <span class="n">src</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">clojure_noob</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="n">core</span><span class="p">.</span><span class="n">clj</span>
+<span class="o">|</span> <span class="n">test</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">clojure_noob</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="n">core_test</span><span class="p">.</span><span class="n">clj</span></pre></div></div>
+        <p>There's nothing inherently special or Clojure-y about this project
+        skeleton. It's just a convention used by Leiningen. You'll be using
+        Leiningen to build and run Clojure apps, and Leiningen expects your
+        app to be laid out this way. Here's the function of each part of the
+        skeleton:</p>
+        
+        <ul>
+<li>
+<code>project.clj</code> is a configuration file for Leiningen. It helps
+        Leiningen answer questions like, "What dependencies does this
+        project have?" and "When this Clojure program runs, what function
+        should get executed first?"</li>
+        <li>
+<code>src/clojure_noob/core.clj</code> is where we'll be doing our
+        Clojure coding for awhile. In general, your source code will fall
+        under <code>src/{project_name}</code>
+</li>
+        <li>The <code>test</code> directory obviously contains tests.</li>
+        <li>
+<code>resources</code> is a place for you to store assets like images; we won't
+        be using it for awhile.</li>
+        </ul>
+<h3 id="2_2__Running_the_Clojure_project">2.2. Running the Clojure project</h3>
+        
+        <p>Now let's actually run the project. First, open
+        <code>src/clojure_noob/core.clj</code> in your favorite editor. You should see
+        this:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">clojure-noob.core</span>
+  <span class="p">(</span><span class="ss">:gen-class</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span>
+  <span class="s">"I don't do a whole lot ... yet."</span>
+  <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+  <span class="c1">;; work around dangerous default behaviour in Clojure</span>
+  <span class="p">(</span><span class="nf">alter-var-root</span> <span class="o">#</span><span class="ss">'*read-eval*</span> <span class="p">(</span><span class="nb">constantly </span><span class="nv">false</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">println </span><span class="s">"Hello, World!"</span><span class="p">))</span></pre></div></div>
+        <p>Change line 9 so that it says this:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">clojure-noob.core</span>
+  <span class="p">(</span><span class="ss">:gen-class</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span>
+  <span class="s">"I don't do a whole lot ... yet."</span>
+  <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">println </span><span class="s">"I'm a little teapot!"</span><span class="p">))</span></pre></div></div>
+        <p>Now, in your terminal, run this:</p>
+        <div class="code pygments"><div class="highlight"><pre>lein run</pre></div></div>
+        <p>You should see the output, "I'm a little teapot!" Congratulations,
+        little teapot!</p>
+        
+        <p>As you go through the book you'll learn what's actually happening
+        here, but for now all you need to know is that you created a function,
+        <code>-main</code>, and that function gets run when you execute <code>lein run</code> at the
+        command line. You can modify <code>-main</code> and execute <code>lein run</code> to
+        experiment with Clojure.</p>
+        
+        <h3 id="2_3__Building_the_Clojure_Project">2.3. Building the Clojure Project</h3>
+        
+        <p>Now let's create a JAR file which you can distribute for big $$$. Run
+        this:</p>
+        <div class="code pygments"><div class="highlight"><pre>lein uberjar
+java -jar target/clojure-noob-0.1.0-SNAPSHOT-standalone.jar</pre></div></div>
+        <p>Look at that! <code>target/clojure-noob-0.1.0-SNAPSHOT-standalone.jar</code> is
+        your new, award-winning Clojure program which you can distribute and
+        run on almost any platform! Awesome!</p>
+        
+        <p>We won't go into the details of how exactly Leiningen works but if
+        you're interested in the lower-level details of compiling and running
+        a Clojure program, you can check out <a href="http://www.flyingmachinestudios.com/programming/how-clojure-babies-are-made-the-java-cycle/">my article series on the topic</a>.</p>
+        
+        <p>For now, though, you have all the basic details you need to build,
+        run, and distribute (very) basic Clojure programs.</p>
+        
+        <p>Before we move on to the next chapter on the Wonder and Glory of
+        Emacs, let's go over one last important tool: the REPL.</p>
+        
+        <h3 id="2_4__Using_the_REPL">2.4. Using the REPL</h3>
+        
+        <p>REPL stands for "Read-Eval-Print Loop" and it's a tool for
+        experimenting with code. It presents you with a prompt and you type
+        code into it. It then <em>reads</em> your input, <em>evaluates</em> it, <em>prints</em> the
+        result, and <em>loops</em>, presenting you with a prompt again.</p>
+        
+        <p>The REPL is considered an essential tool for lisp developpment,
+        development, and I strongly recommend you make use of it. It will let
+        you quickly check your understanding of the language and explore
+        ideas.</p>
+        
+        <p>To start a REPL, run this:</p>
+        <div class="code pygments"><div class="highlight"><pre>lein repl</pre></div></div>
+        <p>You should see output that looks like this:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="nx">nREPL</span> <span class="nx">server</span> <span class="nx">started</span> <span class="nx">on</span> <span class="nx">port</span> <span class="mi">28925</span>
+<span class="nx">REPL</span><span class="o">-</span><span class="nx">y</span> <span class="mf">0.1</span><span class="p">.</span><span class="mi">10</span>
+<span class="nx">Clojure</span> <span class="mf">1.5</span><span class="p">.</span><span class="mi">1</span>
+    <span class="nx">Exit</span><span class="o">:</span> <span class="nx">Control</span><span class="o">+</span><span class="nx">D</span> <span class="nx">or</span> <span class="p">(</span><span class="nx">exit</span><span class="p">)</span> <span class="nx">or</span> <span class="p">(</span><span class="nx">quit</span><span class="p">)</span>
+<span class="nx">Commands</span><span class="o">:</span> <span class="p">(</span><span class="nx">user</span><span class="o">/</span><span class="nx">help</span><span class="p">)</span>
+    <span class="nx">Docs</span><span class="o">:</span> <span class="p">(</span><span class="nx">doc</span> <span class="kd">function</span><span class="o">-</span><span class="nx">name</span><span class="o">-</span><span class="nx">here</span><span class="p">)</span>
+          <span class="p">(</span><span class="nx">find</span><span class="o">-</span><span class="nx">doc</span> <span class="s2">"part-of-name-here"</span><span class="p">)</span>
+  <span class="nx">Source</span><span class="o">:</span> <span class="p">(</span><span class="nx">source</span> <span class="kd">function</span><span class="o">-</span><span class="nx">name</span><span class="o">-</span><span class="nx">here</span><span class="p">)</span>
+          <span class="p">(</span><span class="nx">user</span><span class="o">/</span><span class="nx">sourcery</span> <span class="kd">function</span><span class="o">-</span><span class="nx">name</span><span class="o">-</span><span class="nx">here</span><span class="p">)</span>
+ <span class="nx">Javadoc</span><span class="o">:</span> <span class="p">(</span><span class="nx">javadoc</span> <span class="nx">java</span><span class="o">-</span><span class="nx">object</span><span class="o">-</span><span class="nx">or</span><span class="o">-</span><span class="kr">class</span><span class="o">-</span><span class="nx">here</span><span class="p">)</span>
+<span class="nx">Examples</span> <span class="nx">from</span> <span class="nx">clojuredocs</span><span class="p">.</span><span class="nx">org</span><span class="o">:</span> <span class="cp">[</span><span class="nx">clojuredocs</span> <span class="ow">or</span> <span class="nx">cdoc</span><span class="cp">]</span>
+          <span class="p">(</span><span class="nx">user</span><span class="o">/</span><span class="nx">clojuredocs</span> <span class="nx">name</span><span class="o">-</span><span class="nx">here</span><span class="p">)</span>
+          <span class="p">(</span><span class="nx">user</span><span class="o">/</span><span class="nx">clojuredocs</span> <span class="s2">"ns-here"</span> <span class="s2">"name-here"</span><span class="p">)</span>
+<span class="nx">clojure</span><span class="o">-</span><span class="nx">noob</span><span class="p">.</span><span class="nx">core</span><span class="o">=&gt;</span></pre></div></div>
+        <p>The last line, <code>clojure-noob.core=&gt;</code>, tells you that you're in the
+        <code>clojure-noob.core</code> namespace. We won't get into namespaces now, but
+        you might recognize that namespace from your
+        <code>src/clojure_noob/core.clj</code> file. Try executing your <code>-main</code> function:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="n">clojure</span><span class="o">-</span><span class="n">noob</span><span class="p">.</span><span class="n">core</span><span class="o">=&gt;</span> <span class="p">(</span><span class="o">-</span><span class="n">main</span><span class="p">)</span>
+<span class="n">I</span><span class="err">'</span><span class="n">m</span> <span class="n">a</span> <span class="n">little</span> <span class="n">tea</span> <span class="n">pot</span><span class="o">!</span>
+<span class="n">nil</span></pre></div></div>
+        <p>Cool! Try a few more basic Clojure functions:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="nv">clojure-noob.core=&gt;</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+<span class="mi">10</span>
+<span class="nv">clojure-noob.core=&gt;</span> <span class="p">(</span><span class="nb">* </span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+<span class="mi">24</span>
+<span class="nv">clojure-noob.core=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
+<span class="mi">1</span></pre></div></div>
+        <p>Awesome!</p>
+        
+        <p>Conceptually, the REPL is similar to SSH. In the same way that you can
+        use SSH to interact with a remote server, the Clojure REPL allows you
+        to monkey around with a running Clojure process. This can be very
+        powerful, as you can even attach a REPL to a live, production app and
+        modify your program as it runs. For now, though, we'll be using the
+        REPL to build our knowledge of Clojure syntax and semantics.</p>
+        
+        <p>At this point you should have the basic knowledge you need to begin
+        learning the Clojure language without having to fuss with tools. To
+        learn how to interaact with Clojure with even more proficiency,
+        however, we'll cover Emacs in depth.</p>
+        
+        <p>If Emacs isn't your cup of tea, here are some resources for setting
+        up other text editors for Clojure development:</p>
+        
+        <ul>
+<li>  <a href="http://www.youtube.com/watch?v=wBl0rYXQdGg">Clojure development with Sublime Text 2 (youtube)</a>
+</li>
+        <li>  <a href="http://mybuddymichael.com/writings/writing-clojure-with-vim-in-2013.html">Writing Clojure with Vim in 2013</a>
+</li>
+        <li>  <a href="https://code.google.com/p/counterclockwise/">Counterclockwise</a> is a highly-recommended Eclipse plugin</li>
+        <li>  <a href="http://wiki.jetbrains.net/intellij/Getting_started_with_La_Clojure">Getting Started with La Clojure, a plugin for IntelliJ</a>
+</li>
+        </ul>
+<h2 id="3__Chapter_Summary">3. Chapter Summary</h2>
+        
+        <p>I'm so proud of you, little teapot. You've run your first Clojure
+        program! Not only that, you've become acquainted with the REPL, one of
+        the most important tools for developing Clojure software. Amazing!
+        It brings to mind the immortal lines from Taylor Swift's master
+        songwriting:</p>
+        <div class="code pygments"><div class="highlight"><pre><span class="n">You</span> <span class="n">held</span> <span class="n">your</span> <span class="n">head</span> <span class="n">like</span> <span class="n">a</span> <span class="n">hero</span>
+<span class="n">On</span> <span class="n">a</span> <span class="n">history</span> <span class="n">book</span> <span class="n">page</span>
+<span class="n">It</span> <span class="n">was</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">a</span> <span class="n">decade</span>
+<span class="n">But</span> <span class="n">the</span> <span class="n">start</span> <span class="n">of</span> <span class="n">an</span> <span class="n">age</span>
+
+<span class="o">-</span> <span class="n">Taylor</span> <span class="n">Swift</span><span class="p">,</span> <span class="n">Voice</span> <span class="n">of</span> <span class="n">Our</span> <span class="n">Age</span></pre></div></div>
+        <p>Bravo!</p>
+        <div class="pagenav bottom">
+          <div class="prev">
+            <a href="http://www.braveclojure.com/">
+              ←
+              Introduction
+            </a>
+          </div>
+          <div class="next">
+            <a href="http://www.braveclojure.com/basic-emacs/">
+              Start Using Emacs
+              →
+            </a>
+          </div>
+        </div>
+        <div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" scrolling="no" src="_fichiers/a.html" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 2004px ! important;" title="Disqus" tabindex="0" allowtransparency="true" data-disqus-uid="2" id="dsq-2" frameborder="0" width="100%"></iframe></div>
+        <script>
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'clojureforthebraveandtrue'; // required: replace example with your forum shortname
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+</div>
+      <nav><div style="height: 1290px;" class="sticky-wrapper is-sticky" id="undefined-sticky-wrapper"><div style="bottom: 0px; position: fixed; top: 0px; width: 224px;" class="sticky">
+          <div class="signup">
+            <form action="http://flyingmachinestudios.us1.list-manage.com/subscribe/post?u=60763b0c4890c24bd055f32e6&amp;amp;id=0b40ffd1e1" class="validate" id="mc-embedded-subscribe-form" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank">
+              <input class="email" id="mce-EMAIL" name="EMAIL" placeholder="email address" required="" type="email"><input class="button" id="mc-embedded-subscribe" name="subscribe" value="Get Updates" type="submit">
+</form>
+          </div>
+          <iframe style="width: 106px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="_fichiers/tweet_button.html" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>
+          <iframe src="_fichiers/github-btn.html" height="20" width="62"></iframe>
+          <form action="/search/" id="search">
+            <input id="tipue_search_input" name="q" placeholder="Search" type="search">
+</form>
+          <div class="nav" id="toc">
+            <ol>
+<li class="">
+                <a class="" href="http://www.braveclojure.com/">Introduction</a>
+              </li>
+              <li class="active-section">
+                <a class="active" href="http://www.braveclojure.com/">Building, Running, and The REPL</a>
+              <ol>
+<li><a href="http://www.braveclojure.com/getting-started/#1__First_things_first__What_is_Clojure_">1. First things first: What is Clojure?</a></li>
+<li>
+<a href="http://www.braveclojure.com/getting-started/#2__Leiningen">2. Leiningen</a><ol>
+<li><a href="http://www.braveclojure.com/getting-started/#2_1__Creating_a_new_Clojure_Project">2.1. Creating a new Clojure Project</a></li>
+<li><a href="http://www.braveclojure.com/getting-started/#2_2__Running_the_Clojure_project">2.2. Running the Clojure project</a></li>
+<li><a href="http://www.braveclojure.com/getting-started/#2_3__Building_the_Clojure_Project">2.3. Building the Clojure Project</a></li>
+<li><a href="http://www.braveclojure.com/getting-started/#2_4__Using_the_REPL">2.4. Using the REPL</a></li>
+</ol>
+</li>
+<li><a href="http://www.braveclojure.com/getting-started/#3__Chapter_Summary">3. Chapter Summary</a></li>
+</ol>
+</li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/basic-emacs/">Start Using Emacs</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/using-emacs-with-clojure/">Using Emacs with Clojure</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/do-things/">Do Things: a Clojure Language Crash Course</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/core-functions-in-depth/">Core Functions in Depth</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/functional-programming/">Functional Programming</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/organization/">Organizing Your Project: a Librarian's Tale</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/read-and-eval/">Clojure Alchemy: Reading, Evaluation and Macros</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/writing-macros/">Writing Macros</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/concurrency/">Concurrency, Parallelism, and State. And Zombies.</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/upcoming/">What's Next?</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/resources/">Other Resources</a>
+              </li>
+              <li class="">
+                <a class="" href="http://www.braveclojure.com/about/">About</a>
+              </li>
+            </ol>
+</div>
+        </div></div>
+      </nav>
+</div>
+    <footer><div class="signup">
+        <form action="http://flyingmachinestudios.us1.list-manage.com/subscribe/post?u=60763b0c4890c24bd055f32e6&amp;amp;id=0b40ffd1e1" class="validate" id="mc-embedded-subscribe-form" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank">
+          Spending your nights pining for the next chapter of <em>Clojure for the Brave and True</em>? Then follow <a href="https://twitter.com/nonrecursive">@nonrecursive</a> or submit this:
+          <input class="email" id="mce-EMAIL" name="EMAIL" placeholder="email address" required="" type="email"><input class="button" id="mc-embedded-subscribe" name="subscribe" value="Get Updates" type="submit">
+</form>
+        <p>Found a mistake? I'd love to hear it! Please email <a href="mailto:brave-clojure@googlegroups.com">the development mailing list</a></p>
+      </div>
+    </footer><script src="_fichiers/jquery-1.js"></script><script src="_fichiers/underscore.js"></script><script src="_fichiers/scrollspy.js"></script><script src="_fichiers/jquery.js"></script><script src="_fichiers/application.js"></script><script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-43463851-1']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+
+</body></html>
