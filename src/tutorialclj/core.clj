@@ -2,6 +2,12 @@
 
     (:use [overtone.live] 
           [overtone.inst.sampled-piano] ))
+(recording-start "my-awesome-sounds.wav")
+
+;;make awesome sounds!
+(demo (sin-osc))
+
+;;stop recording:
 
 
 ;; use the sampled piano
@@ -100,4 +106,7 @@
 
 (stop)
 
-(defn -main [& args] (testson))
+(defn -main [& args] )
+
+(recording-stop)
+(stop)
